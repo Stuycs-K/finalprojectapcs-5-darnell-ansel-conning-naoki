@@ -10,6 +10,7 @@ Population spread simulation
 
 A population simulation designed to model spatial population spread over time. While population spread over the continuous domain requires complex pde's, simulating it allows us to discretize space and time. This spread will be done through diffusion matrices, similar to the kernels which we explored in our recent image processing lab.
 
+![image](https://github.com/user-attachments/assets/42e7daf9-05e8-4bf2-9d30-f6d8ce6f1e1b)
 
 
 
@@ -17,6 +18,8 @@ A population simulation designed to model spatial population spread over time. W
 # Project Design
 
 UML Diagrams and descriptions of key algorithms, classes, and how things fit together.
+
+
 
 
     
