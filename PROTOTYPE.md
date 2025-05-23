@@ -16,8 +16,7 @@ A population simulation designed to model spatial population spread over time. W
 UML Diagrams and descriptions of key algorithms, classes, and how things fit together.
 
 
-![image](https://github.com/user-attachments/assets/547eb6b5-c5c5-4259-b4f5-2f061b7b75ce)
-
+![image](https://github.com/user-attachments/assets/4c3eaa3f-4bc6-4551-894d-dd6eb74bf814)
 
     
 # Intended pacing:
