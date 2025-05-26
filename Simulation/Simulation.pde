@@ -1,0 +1,6 @@
+class Simulation{
+  setup(){
+  }
+  draw(){
+  }
+}
