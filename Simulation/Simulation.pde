@@ -1,6 +1,16 @@
+int cols;
+int rows;
+
+int getCols(){
+  return cols;
+}
+int getRows(){
+  return rows
+}
+
 void setup(){
-  int cols = 33;
-  int rows = 17;
+  cols = 33;
+  rows = 17;
   size(1000, 800);
   int rectW = width / cols;
   int rectH = height / rows;
