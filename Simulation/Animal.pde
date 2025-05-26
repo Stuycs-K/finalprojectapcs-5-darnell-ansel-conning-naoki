@@ -23,6 +23,9 @@ class Animal{
 class Predator extends Animal{
   int hunger;
   ArrayList<Predator> predators;
+  Predator(){
+    super(int(random(0, width + 1)), int(random(0, height + 1)));
+  }
   Predator(int x_, int y_, int hunger_){
     super(x_, y_);
     hunger = hunger_;
