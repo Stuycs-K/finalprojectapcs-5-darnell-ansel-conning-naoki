@@ -17,7 +17,6 @@ void setup(){
 
 void draw() {
 }
-/*
 
 int cols;
 int rows;
@@ -28,4 +27,3 @@ int getCols() {
 int getRows() {
   return rows;
 }
-*/
