@@ -3,23 +3,31 @@ class Spread{
   ArrayList<Prey> prey;
   
   ArrayList<Predator>[][] predmap;
-  ArrayList<Prey>[][] preymap;  
+  ArrayList<Prey>[][] preymap;
   
-  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr){
+  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y){
     pred = predator;
     prey = pr;
-   for(Predator x: pred){
-    xy = (predmap[x.getX()][x.getY()]).add(x);
+    
+    predmap = new ArrayList<Predator>[x][y];
+    preymap = new ArrayList<Prey>[x][y];
+  }
+  
+  public void tick(){
+    predmap = new ArrayList<Predator>[predmap[0].length][predmap.length];
+    preymap = new ArrayList<Pret>[preymap[0].length][preymap.length];
+    
+    
+    
+  for(Predator x: pred){
+    if(
+    (predmap[x.getX()][x.getY()]).add(x);
   }
   for(Prey x: prey){
   (predmap[x.getX()][x.getY()]).add(x);
   }
   
   }
-  
-
-  
-  
   
   
   
