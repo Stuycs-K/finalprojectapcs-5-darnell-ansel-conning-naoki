@@ -26,16 +26,3 @@ void setup(){
 
 void draw() {
 }
-<<<<<<< HEAD
-
-int cols;
-int rows;
-
-int getCols() {
-  return cols;
-}
-int getRows() {
-  return rows;
-}
-=======
->>>>>>> AnselBranch

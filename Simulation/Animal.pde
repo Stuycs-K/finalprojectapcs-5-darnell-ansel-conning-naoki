@@ -24,13 +24,8 @@ class Predator extends Animal{
   int hunger;
   ArrayList<Predator> predators;
   Predator(){
-<<<<<<< HEAD
-    super(int(random(0, cols + 1), int(random(0, rows + 1))));
-    hunger = random(0,0);////////UPDATE THIS WITH PROPER BOUNDS/////////
-=======
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
     hunger = int(random(0,0));////////UPDATE THIS WITH PROPER BOUNDS/////////
->>>>>>> AnselBranch
     predators.add(this);
   }
   Predator(int x_, int y_, int hunger_){
@@ -46,12 +41,7 @@ class Predator extends Animal{
   void setHunger(int change){
     hunger = change;
   }
-<<<<<<< HEAD
-  void addHunger(int add)
-  {
-=======
   void addHunger(int add){
->>>>>>> AnselBranch
     hunger += add;
   }
 }
