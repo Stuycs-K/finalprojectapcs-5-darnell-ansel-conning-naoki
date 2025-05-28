@@ -1,3 +1,12 @@
+static int cols, rows;
+
+int getCols() {
+  return cols;
+}
+int getRows() {
+  return rows;
+}
+
 void setup(){
   int cols = 33;
   int rows = 17;
@@ -17,6 +26,7 @@ void setup(){
 
 void draw() {
 }
+<<<<<<< HEAD
 
 int cols;
 int rows;
@@ -27,3 +37,5 @@ int getCols() {
 int getRows() {
   return rows;
 }
+=======
+>>>>>>> AnselBranch
