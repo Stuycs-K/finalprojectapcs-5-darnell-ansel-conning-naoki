@@ -25,38 +25,19 @@ void dropRock(int size, int x, int y){
   }
 }
 
-dropWater(){
-  int c = 0;
-  int r= 0;
+void dropWater(int size, int x, int y){
   color temp  = terrain[int(random(0, terrain.length))];
-  while(flag)
+  int radius = int(random(2, 8));
+  float deltaTheta = HALF_PI/radius
+  for(float theta = 0; theta < HALF_PI; theta += deltaTheta)
   {
-      
-      int radius = int(random(2, 8));
-      if(c != constrain(c + radius, 0, map.length - 1))
-      {
-        radius = c - constrain(c + radius, 0, map.length - 1);
-        c = c + radius;
-      }
-      if(c != constrain(c + radius, 0, map.length - 1))
-      {
-        radius = c - constrain(c + radius, 0, map.length - 1);
-        c = c + radius;
-      }
-      float deltaTheta = HALF_PI/radius
-      for(constrain(c - radius, 0, map.length - 1);
-      constrain(r - radius, 0, map.length - 1);
-      for(float theta = 0; theta < HALF_PI; theta += deltaTheta)
-      {
-        for(int k = 1; k <= (r - tan(theta) * col); k ++)
-        {
-          map[c][r + k] = WATER;
-        }
-        //have C go over teh + and minus and just flip amplitude of r + k to be r - k
-      }
-      //REPEAT OVER ALL C and FLIP
+    for(int k = 1; k <= (r - tan(theta) * col); k ++)
+    {
+      map[x][y + k] = WATER;
     }
+    //have C go over teh + and minus and just flip amplitude of r + k to be r - k
   }
+  //REPEAT OVER ALL C and FLIP
 }
 
 void generateTerrain(int rectW, int rectH){
