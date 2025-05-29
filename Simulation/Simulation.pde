@@ -47,9 +47,18 @@ void createMap(){
         radius = c - constrain(c + radius, 0, map.length - 1);
         c = c + radius;
       }
+      float deltaTheta = HALF_PI/radius
       for(constrain(c - radius, 0, map.length - 1);
       constrain(r - radius, 0, map.length - 1);
-      for(dist = sin(PI)
+      for(float theta = 0; theta < PI; theta += deltaTheta)
+      {
+        for(int k = 1; k <= (r - tan(theta) * col); k ++)
+        {
+          map[c][r + k] = WATER;
+        }
+        //have C go over teh + and minus and just flip amplitude of r + k to be r - k
+      }
+      //REPEAT OVER ALL C and FLIP
     }
   }
 }
