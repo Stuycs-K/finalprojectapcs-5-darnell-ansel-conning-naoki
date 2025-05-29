@@ -6,8 +6,9 @@ class Spread{
   ArrayList<Prey>[][] preymap;
   int oldage;
   int hunger;
+  int growthC;
   
-  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y,int oldAge,int hungerthreshold){
+  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y,int oldAge,int hungerthreshold,int growthCoeff){
     //main arraylist of all objects
     pred = predator;
     prey = pr;
@@ -25,25 +26,32 @@ class Spread{
   // parameters
   oldage = oldAge;
   hunger = hungerthreshold;
+  growthC = growthCoeff;
   }
   
   public void tick(){
-    predmap = new ArrayList<Predator>[predmap[0].length][predmap.length];
-    preymap = new ArrayList<Pret>[preymap[0].length][preymap.length];
-    
-    
-   int oldAge = 25;
-   int hungerthreshold = 25;
 
-  if(x.getAge > oldAge || x.getHunger > hungerthreshold){
-    pred.remove(i);
-    
-  }
+  for(int i=0;i<predmap.length;i++){
+    for(int x=0;x<predmap[0].length;x++){
+      //loop through map array
+      for(int m=0;m<predmap[i][x].size();m++){
+        //loop through predator list at location
+        Predator x = predmap[i][x];
+         if(x.getAge > oldAge || x.getHunger > hungerthreshold){
+          pred.remove(m);
+        }
 
-      if(i.getAge > oldAge){
-    prey.remove(i);
-  }
-
+      }
+      for(int n=0;n<preymap[i][x].size();n++){
+        //loop through prey list at location
+          Prey x = preymap[i][x];
+         if(x.getAge > oldAge){
+          pred.remove(n);
+        }
+        int baby = pred.size() * growthC;
+        for(int
+      }
+    }
   
   
   
