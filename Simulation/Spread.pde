@@ -37,20 +37,59 @@ class Spread{
       for(int m=0;m<predmap[i][x].size();m++){
         //loop through predator list at location
         Predator x = predmap[i][x];
+        //increment age
+        x.addAge();
+        //death
          if(x.getAge > oldAge || x.getHunger > hungerthreshold){
           pred.remove(m);
         }
+        //growth
 
       }
       for(int n=0;n<preymap[i][x].size();n++){
         //loop through prey list at location
           Prey x = preymap[i][x];
+          //increment age
+          x.addAge();
+          //death
          if(x.getAge > oldAge){
           pred.remove(n);
         }
+        //growth
         int baby = pred.size() * growthC;
-        for(int
+        for(int a=0;a<baby;a++){
+          new Prey(i,x,0);
+          
+        }
       }
+      
+      for(int m=0;m<pred.size();m++){
+        //loop through predator list at location
+        Predator x = pred.get(m);
+        //increment age
+        x.addAge();
+        //death
+         if(x.getAge > oldAge || x.getHunger > hungerthreshold){
+          pred.remove(m);
+        }
+        //growth
+
+      }
+      for(int n=0;n<prey.size();n++){
+        //loop through prey list at location
+          Prey x = prey.get(n);
+          //increment age
+          x.addAge();
+          //death
+         if(x.getAge > oldAge){
+          pred.remove(n);
+        }
+        //growth
+        int baby = pred.size() * growthC;
+        for(int a=0;a<baby;a++){
+          new Prey(i,x,0);
+          
+        }
     }
   
   
