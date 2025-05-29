@@ -18,6 +18,9 @@ class Animal{
   public int getAge(){
     return age;
   }
+  public int addAge(){
+    age ++;
+  }
 }
 
 class Predator extends Animal{

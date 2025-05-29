@@ -15,7 +15,17 @@ color[] terrain = {GRASS, ROCK, WATER};
 
 void createMap(){
   dropRock();
-  dropWater
+  dropWater();
+}
+
+void dropRock(int size, int x, int y){
+  for(int i = 0; i < size; i ++)
+  {
+    map[x + int(random(-int(pow(1.5, size)), int(pow(1.5, size))))][y + int(random(-int(pow(1.5, size)), int(pow(1.5, size))))] = 1;
+  }
+}
+
+dropWater(){
   int c = 0;
   int r= 0;
   color temp  = terrain[int(random(0, terrain.length))];
@@ -65,7 +75,7 @@ void generateTerrain(int rectW, int rectH){
           stroke(ROCK);
           fill(ROCK);
           break;
-         case 2;
+         case 2:
            stroke(WATER);
            fill(water);
            break;
