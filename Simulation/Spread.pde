@@ -18,17 +18,32 @@ class Spread{
     preymap = new ArrayList<Pret>[preymap[0].length][preymap.length];
     
     
-    
-  for(Predator x: pred){
-    if(
-    (predmap[x.getX()][x.getY()]).add(x);
+   int oldAge = 25;
+   int hungerthreshold = 25;
+  for(int i=0;i<pred.size();i++){
+    if(x.getAge > oldAge || x.getHunger > hungerthreshold){
+    pred.remove(i);
   }
-  for(Prey x: prey){
-  (predmap[x.getX()][x.getY()]).add(x);
+  else{
+    (predmap[i.getX()][i.getY()]).add(i);
+  }
   }
   
+  
+
+  
+  for(int i=0;i<prey.size();i++){
+    if(i.getAge > oldAge){
+    prey.remove(i);
+  }
+  else{
+    (preymap[i.getX()][i.getY()]).add(i);
+  }
   }
   
+  
+  
+  }
   
   
   public ArrayList<Predator> getPred(){
