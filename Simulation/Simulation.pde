@@ -14,28 +14,14 @@ color WATER = color(0, 0, 255);
 color[] terrain = {GRASS, ROCK, WATER};
 
 void createMap(){
-  boolean flag = true;
+  dropRock();
+  dropWater
   int c = 0;
   int r= 0;
   color temp  = terrain[int(random(0, terrain.length))];
   while(flag)
   {
-    if(temp == GRASS)
-    {
-      ///////////////////////MAKE THIS A FOR LOOP SINCE YOU USE CONSTRAIN IT LENDS ITSELF WELL///////////////////////
-      map[constrain(c - 1, 0, map.length - 1)][constrain(r - 1, 0, map.length - 1)] = GRASS;
-      map[constrain(c - 1, 0, map.length - 1)][constrain(r, 0, map.length - 1)] = GRASS;
-      map[constrain(c - 1, 0, map.length - 1)][constrain(r + 1, 0, map.length - 1)] = GRASS;
-      map[constrain(c, 0, map.length - 1)][constrain(r - 1, 0, map.length - 1)] = GRASS;
-      map[constrain(c, 0, map.length - 1)][constrain(r, 0, map.length - 1)] = GRASS;
-      map[constrain(c, 0, map.length - 1)][constrain(r + 1, 0, map.length - 1)] = GRASS;
-      map[constrain(c + 1, 0, map.length - 1)][constrain(r - 1, 0, map.length - 1)] = GRASS;
-      map[constrain(c + 1, 0, map.length - 1)][constrain(r, 0, map.length - 1)] = GRASS;
-      map[constrain(c + 1, 0, map.length - 1)][constrain(r + 1, 0, map.length - 1)] = GRASS;
-      ///////////////////////MAKE THIS A FOR LOOP SINCE YOU USE CONSTRAIN IT LENDS ITSELF WELL///////////////////////
-    }
-    else if(temp == WATER)
-    {
+      
       int radius = int(random(2, 8));
       if(c != constrain(c + radius, 0, map.length - 1))
       {
@@ -50,7 +36,7 @@ void createMap(){
       float deltaTheta = HALF_PI/radius
       for(constrain(c - radius, 0, map.length - 1);
       constrain(r - radius, 0, map.length - 1);
-      for(float theta = 0; theta < PI; theta += deltaTheta)
+      for(float theta = 0; theta < HALF_PI; theta += deltaTheta)
       {
         for(int k = 1; k <= (r - tan(theta) * col); k ++)
         {
@@ -65,13 +51,26 @@ void createMap(){
 
 void generateTerrain(int rectW, int rectH){
   createMap();
-  for (int i = 0; i < cols; i++)
+  for (int i = 0; i < rows; i++)
   {
-    for (int j = 0; j < rows; j++)
+    for (int j = 0; j < cols; j++)
     {
-      stroke(map[j][i]);
-      fill(map[j][i]);
-      rect(i * rectW, j * rectH, rectW, rectH);
+      switch(map[i][j])
+      {
+        case 0:
+          stroke(GRASS);
+          fill(GRASS);
+          break;
+         case 1:
+          stroke(ROCK);
+          fill(ROCK);
+          break;
+         case 2;
+           stroke(WATER);
+           fill(water);
+           break;
+      }
+      rect(j * rectW, i * rectH, rectW, rectH);
     }
   }
 }
