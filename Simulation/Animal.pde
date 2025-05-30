@@ -18,7 +18,7 @@ class Animal{
   public int getAge(){
     return age;
   }
-  public int addAge(){
+  public void addAge(){
     age ++;
   }
 }

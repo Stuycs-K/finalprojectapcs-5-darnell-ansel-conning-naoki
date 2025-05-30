@@ -14,26 +14,39 @@ color WATER = color(0, 0, 255);
 color[] terrain = {GRASS, ROCK, WATER};
 
 void createMap(){
-  dropRock();
-  dropWater();
+  int size = int(random(1, 7));
+  int x = int(random(0, cols + 1));
+  int y = int(random(0, rows + 1));
+  for(int i = 0; i < 5; i ++)
+  {
+    dropRock(size, x, y);
+    x = int(random(0, cols + 1));
+    y = int(random(0, rows + 1));
+  }
+  size = 5;//int(random(1, 10));
+  int radius = int(random(1, size));
+  x = int(random(radius, cols + 1 - radius));
+  y = int(random(radius, rows + 1 - radius));
+  for(int i = 0; i < 4; i ++)
+  {
+    dropWater(size, x, y, radius);
+  }
 }
 
 void dropRock(int size, int x, int y){
   for(int i = 0; i < size; i ++)
   {
-    map[x + int(random(-int(pow(1.5, size)), int(pow(1.5, size))))][y + int(random(-int(pow(1.5, size)), int(pow(1.5, size))))] = 1;
+    map[x + constrain(int(random(-int(pow(1.5, size))- 1, int(pow(1.5, size)) + 1)), -x, cols - x - 1)][y + constrain(int(random(-int(pow(1.5, size))- 1, int(pow(1.5, size)) + 1)), -y, rows - y - 1)] = 1;
   }
 }
 
-void dropWater(int size, int x, int y){
-  color temp  = terrain[int(random(0, terrain.length))];
-  int radius = int(random(2, 8));
+void dropWater(int size, int x, int y, int radius){
   float deltaTheta = HALF_PI/radius;
   for(float theta = deltaTheta; theta < HALF_PI; theta += deltaTheta)
   {
-    for(int k = (radius - 1); k > 0; k --)
+    for(int k = 1; k < radius; k ++)
     {
-      for(int j = 0; j <= int(tan(theta)) * k; j ++)
+      for(int j = 0; j < int(tan(theta)) * k; j ++)
       {
         map[x+k][y+j] = 2;
         map[x+k][y-j] = 2;
@@ -62,7 +75,7 @@ void generateTerrain(int rectW, int rectH){
           break;
          case 2:
            stroke(WATER);
-           fill(water);
+           fill(WATER);
            break;
       }
       rect(j * rectW, i * rectH, rectW, rectH);
@@ -71,13 +84,14 @@ void generateTerrain(int rectW, int rectH){
 }
 
 void setup(){
-   cols = 50;
-   rows = 50;
+  cols = 50;
+  rows = 50;
   size(1000, 800);
   int rectW = width / cols;
   int rectH = height / rows;
   cols = width / rectW;
   rows = height / rectH;
+  map = new int[cols][rows];
   generateTerrain(rectW, rectH);
 }
 
