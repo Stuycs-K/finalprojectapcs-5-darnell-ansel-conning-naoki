@@ -57,6 +57,10 @@ class Spread{
         }
     }
     
+    //run diffuse
+    diffuse();
+    
+    
     //setup for encounters
     predmap = new ArrayList<Predator>[x][y];
     preymap = new ArrayList<Prey>[x][y];
@@ -66,13 +70,19 @@ class Spread{
    for(int i=0;i<prey.size();i++){
     (preymap[i.getX()][i.getY()]).add(i);
   }
+  
+  //run encounter
   encounter();
   
   
   
+  
   }
-
+  
   public void encounter(){
+    
+  }
+  public void diffuse(int[][] Matrix, int[][]map, int ){
     
   }
   
@@ -93,8 +103,7 @@ class Spread{
   
 }
 
-class Diffuse{
-}
+
 
 
 
