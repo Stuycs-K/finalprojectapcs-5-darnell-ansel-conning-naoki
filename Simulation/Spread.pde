@@ -9,8 +9,10 @@ class Spread{
   int growthC;
   int X;
   int Y;
+  int[][]Map;
+  int[][]Matrix;
   
-  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y,int oldAge,int hungerthreshold,int growthCoeff){
+  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y,int oldAge,int hungerthreshold,int growthCoeff,int[][] map,int[][] Matrix){
     //main arraylist of all objects
     pred = predator;
     prey = pr;
@@ -82,7 +84,7 @@ class Spread{
   public void encounter(){
     
   }
-  public void diffuse(int[][] Matrix, int[][]map, int ){
+  public void diffuse(int[][] Matrix, int[][]map ){
     
   }
   
