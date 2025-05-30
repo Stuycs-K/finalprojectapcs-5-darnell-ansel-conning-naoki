@@ -5,7 +5,7 @@ int getCols(){
   return cols;
 }
 int getRows(){
-  return rows
+  return rows;
 }
 
 void setup(){

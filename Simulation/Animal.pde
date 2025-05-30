@@ -1,3 +1,4 @@
+
 class Animal{
   int x,y,age;
   Animal(int x_, int y_){
@@ -45,6 +46,7 @@ class Prey extends Animal{
     //////very basic completely random spawn/////
     super(int(random(0, Simulation.getCols()) + 1), int(random(0, Simulation.getRows() + 1)));
     prey.add(this);  
+    prey
   }
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
