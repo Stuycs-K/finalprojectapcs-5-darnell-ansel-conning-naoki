@@ -23,37 +23,38 @@ void createMap(){
     x = int(random(0, cols + 1));
     y = int(random(0, rows + 1));
   }
-  size = 5;//int(random(1, 10));
-  int radius = int(random(1, size));
-  x = int(random(radius, cols + 1 - radius));
-  y = int(random(radius, rows + 1 - radius));
-  for(int i = 0; i < 4; i ++)
-  {
+  size = 20;//int(random(1, 10));
+  int radius = 4;//int(random(1, size));
+  x = 200;
+  y = 200;//int(random(radius, rows + 1 - radius));
+  //for(int i = 0; i < 4; i ++)
+  //{
     dropWater(size, x, y, radius);
-  }
+  //}
 }
 
 void dropRock(int size, int x, int y){
   for(int i = 0; i < size; i ++)
   {
-    map[x + constrain(int(random(-int(pow(1.5, size))- 1, int(pow(1.5, size)) + 1)), -x, cols - x - 1)][y + constrain(int(random(-int(pow(1.5, size))- 1, int(pow(1.5, size)) + 1)), -y, rows - y - 1)] = 1;
+    //map[x + constrain(int(random(-int(pow(1.5, size))- 1, int(pow(1.5, size)) + 1)), -x, cols - x - 1)][y + constrain(int(random(-int(pow(1.5, size))- 1, int(pow(1.5, size)) + 1)), -y, rows - y - 1)] = 1;
   }
 }
 
 void dropWater(int size, int x, int y, int radius){
-  float deltaTheta = HALF_PI/radius;
+  float deltaTheta = HALF_PI/(radius-1);
+  int k = radius - 1;
+  map[y][x] = 2;
   for(float theta = deltaTheta; theta < HALF_PI; theta += deltaTheta)
   {
-    for(int k = 1; k < radius; k ++)
-    {
       for(int j = 0; j < int(tan(theta)) * k; j ++)
       {
-        map[x+k][y+j] = 2;
-        map[x+k][y-j] = 2;
-        map[x-k][y+j] = 2;
-        map[x-k][y-j] = 2;
+        map[y-k][x+j] = 2;
+        //map[y+k][x-j] = 2;
+        //map[y-k][x+j] = 2;
+        //map[y-k][x-j] = 2;
       }
-    }
+      k--;
+
   }
 }
 
@@ -84,14 +85,14 @@ void generateTerrain(int rectW, int rectH){
 }
 
 void setup(){
-  cols = 50;
-  rows = 50;
+  cols = 500;
+  rows = 500;
   size(1000, 800);
   int rectW = width / cols;
   int rectH = height / rows;
   cols = width / rectW;
   rows = height / rectH;
-  map = new int[cols][rows];
+  map = new int[rows][cols];
   generateTerrain(rectW, rectH);
 }
 
