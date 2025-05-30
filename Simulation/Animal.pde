@@ -25,10 +25,10 @@ class Predator extends Animal{
   int hunger;
   ArrayList<Predator> predators;
   Predator(){
-    super(int(random(0, Simulation.getCols()) + 1), int(random(0, Simulation.getRows() + 1)));
-    hunger = random(0,0);////////UPDATE THIS WITH PROPER BOUNDS/////////
+    super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
+    hunger = int(random(0,0));////////UPDATE THIS WITH PROPER BOUNDS/////////
     predators.add(this);
-  }
+  }class Growth{
   Predator(int x_, int y_, int hunger_){
     super(x_, y_);
     hunger = hunger_;
@@ -39,17 +39,27 @@ class Predator extends Animal{
     hunger = hunger_;
     predators.add(this);
   }
-  
+  void setHunger(int change){
+    hunger = change;
+  }
+  void addHunger(int add){
+    hunger += add;
+  }
+}
+
 class Prey extends Animal{
   ArrayList<Prey> prey;
   Prey(){
     //////very basic completely random spawn/////
-    super(int(random(0, Simulation.getCols()) + 1), int(random(0, Simulation.getRows() + 1)));
-    prey.add(this);  
+    super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
+    prey.add(this);
     prey
   }
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
     prey.add(this);
+  }
+  void die(){
+    prey.remove(this);
   }
 }
