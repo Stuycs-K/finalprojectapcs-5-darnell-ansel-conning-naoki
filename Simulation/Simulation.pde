@@ -28,16 +28,20 @@ void dropRock(int size, int x, int y){
 void dropWater(int size, int x, int y){
   color temp  = terrain[int(random(0, terrain.length))];
   int radius = int(random(2, 8));
-  float deltaTheta = HALF_PI/radius
-  for(float theta = 0; theta < HALF_PI; theta += deltaTheta)
+  float deltaTheta = HALF_PI/radius;
+  for(float theta = deltaTheta; theta < HALF_PI; theta += deltaTheta)
   {
-    for(int k = 1; k <= (r - tan(theta) * col); k ++)
+    for(int k = (radius - 1); k > 0; k --)
     {
-      map[x][y + k] = WATER;
+      for(int j = 0; j <= int(tan(theta)) * k; j ++)
+      {
+        map[x+k][y+j] = 2;
+        map[x+k][y-j] = 2;
+        map[x-k][y+j] = 2;
+        map[x-k][y-j] = 2;
+      }
     }
-    //have C go over teh + and minus and just flip amplitude of r + k to be r - k
   }
-  //REPEAT OVER ALL C and FLIP
 }
 
 void generateTerrain(int rectW, int rectH){
