@@ -23,7 +23,7 @@ void generateTerrain(int rectW, int rectH){
       rect(i * rectW, j * rectH, rectW, rectH);
       //have the things grow in patterns later, think tetris pieces
     }
-  } 
+  }
 }
 
 void setup(){
