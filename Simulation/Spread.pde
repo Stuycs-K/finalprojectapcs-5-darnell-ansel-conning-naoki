@@ -1,4 +1,4 @@
-/*class Spread {
+class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
 
@@ -22,14 +22,14 @@
     growthC = growthCoeff;
   }
 
-  public void tick() {
+  void tick() {
     for (int m=0; m<pred.size(); m++) {
       //loop through predator list
       Predator x = pred.get(m);
       //increment age
       x.addAge();
       //death
-      if (x.getAge() > oldAge || x.getHunger() > hungerthreshold) {
+      if (x.getAge() > oldage || x.getHunger() > hunger) {
         pred.remove(m);
       }
       //growth
@@ -40,7 +40,7 @@
       //increment age
       x.addAge();
       //death
-      if (x.getAge > oldAge) {
+      if (x.getAge() > oldage) {
         pred.remove(n);
       }
       //growth
@@ -100,4 +100,3 @@
 
     class Growth {
     }
-  */

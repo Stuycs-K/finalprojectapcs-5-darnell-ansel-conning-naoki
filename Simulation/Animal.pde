@@ -47,6 +47,9 @@ class Predator extends Animal{
   void addHunger(int add){
     hunger += add;
   }
+  int getHunger(){
+    return hunger;
+  }
 }
 
 class Prey extends Animal{
