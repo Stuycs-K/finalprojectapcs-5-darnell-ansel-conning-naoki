@@ -1,3 +1,4 @@
+/*
 class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
@@ -100,3 +101,5 @@ class Spread {
 
     class Growth {
     }
+    
+    */

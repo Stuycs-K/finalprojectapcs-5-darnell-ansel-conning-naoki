@@ -21,7 +21,10 @@ class Animal{
   public void addAge(){
     age ++;
   }
-}
+  public void display(PImage img, int x, int y){
+    image(img, x, y);
+  }
+}  
 
 class Predator extends Animal{
   int hunger;
