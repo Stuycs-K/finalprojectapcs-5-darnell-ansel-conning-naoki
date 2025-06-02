@@ -17,8 +17,8 @@ PImage preyImg, predImg;
 
 
 void setup(){
-  preyImg = loadImage("prey.jpg");
-  predImg = loadImage("pred.jpg");
+  preyImg = loadImage("prey.png");
+  predImg = loadImage("pred.png");
   cols = 500;
   rows = 500;
   size(1000, 800);
@@ -27,15 +27,16 @@ void setup(){
   cols = width / rectW;
   rows = height / rectH;
   map = new int[rows][cols];
-  createMap();
+  createMap(15, 10);
   generateTerrain(rectW, rectH);
+  
 }
 
 void createMap(int rocks, int puddles){
   int size, x, y;
   for(int i = 0; i < rocks; i ++)
   {
-    size = int(random(5, 70));
+    size = int(random(10, 71));
     x = int(random(0, cols + 1));
     y = int(random(0, rows + 1));
     dropRock(size, x, y);
@@ -50,8 +51,8 @@ void createMap(int rocks, int puddles){
 }
 
 void dropRock(int size, int x, int y){
-  int rockWidth = round(random(1, size));
-  int rockHeight = round(random(1, size));
+  int rockWidth = round(random(size/3, size));
+  int rockHeight = round(random(size/3, size));
   for(int i = 0; i < rockWidth; i ++)
   {
     for(int k = 0; k < rockHeight; k ++)
