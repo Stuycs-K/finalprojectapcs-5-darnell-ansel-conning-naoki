@@ -1,4 +1,3 @@
-
 class Animal{
   int x,y,age;
   Animal(int x_, int y_){
@@ -31,7 +30,7 @@ class Predator extends Animal{
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
     hunger = int(random(0,0));////////UPDATE THIS WITH PROPER BOUNDS/////////
     predators.add(this);
-  }class Growth{
+  }
   Predator(int x_, int y_, int hunger_){
     super(x_, y_);
     hunger = hunger_;
@@ -56,7 +55,6 @@ class Prey extends Animal{
     //////very basic completely random spawn/////
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
     prey.add(this);
-    prey
   }
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
