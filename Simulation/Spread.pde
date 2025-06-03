@@ -1,4 +1,4 @@
-/*class Spread {
+class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
 
@@ -21,7 +21,7 @@
     hunger = hungerthreshold;
     growthC = growthCoeff;
   }
-
+/*
   void tick() {
     for (int m=0; m<pred.size(); m++) {
       //loop through predator list
@@ -50,7 +50,7 @@
       }
     }
     //run diffuse
-    diffuse();
+    //diffuse();
     
     //setup for encounters
     predmap = new ArrayList<Predator>[x][y];
@@ -64,7 +64,24 @@
 
     //run encounter
     encounter();
-  }
+  }*/
+  
+  
+  //Trying agent based tick()
+ void aTick(ArrayList<ArrayList<ArrayList<Animals>>> AnimalMap){
+   for(int a = 0; a < rows; a ++)
+   {
+     for(int b = 0; b < cols; b ++)
+     {
+       AnimalMap.get(a).get(b).forEach( (n) if(n.isInstance(Predator)) {encounter(Predator)}) //you get the point finish it....
+     }
+   }
+ }
+  
+  
+  
+  
+  
 }
   class Encounter {
     float chance = 0.70;
@@ -96,4 +113,3 @@
 }
     class Growth {
     }
-    */
