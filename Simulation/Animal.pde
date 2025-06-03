@@ -21,11 +21,13 @@ class Animal{
   public void addAge(){
     age ++;
   }
-}
+  public void display(PImage img, int x, int y){
+    image(img, x, y, 13, 13);
+  }
+}  
 
 class Predator extends Animal{
   int hunger;
-  ArrayList<Predator> predators;
   Predator(){
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
     hunger = int(random(0,0));////////UPDATE THIS WITH PROPER BOUNDS/////////
@@ -47,14 +49,16 @@ class Predator extends Animal{
   void addHunger(int add){
     hunger += add;
   }
+  int getHunger(){
+    return hunger;
+  }
 }
-  
+
 class Prey extends Animal{
-  ArrayList<Prey> prey;
   Prey(){
     //////very basic completely random spawn/////
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
-    prey.add(this);  
+    prey.add(this);
   }
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
