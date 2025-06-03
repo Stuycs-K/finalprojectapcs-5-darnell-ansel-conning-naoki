@@ -14,6 +14,8 @@ color WATER = color(0, 0, 255);
 //ADD SAND WHERE PREY MOVES SLOWER? ADD WHATEVER YOU WANT;
 color[] terrain = {GRASS, ROCK, WATER};
 PImage preyImg, predImg;
+ArrayList<Prey> prey = new ArrayList<>();
+ArrayList<Predator> predators= new ArrayList<>();
 
 
 void setup(){
@@ -29,7 +31,7 @@ void setup(){
   map = new int[rows][cols];
   createMap(15, 10);
   generateTerrain(rectW, rectH);
-  
+  generateAnimals(200);
 }
 
 void createMap(int rocks, int puddles){
@@ -103,5 +105,50 @@ void generateTerrain(int rectW, int rectH){
   }
 }
 
+void generateAnimals(int num){
+  int preyCount = round(random(round(num * 3/4), num + 1));
+  int predCount = num - preyCount;
+  int age, x, y, k;
+  for(int i = 0; i < preyCount; i += k)
+  {
+    for(k = 0; k < int(random(1,11)); k ++)
+    {
+      age = int(random(0, 26));
+      x = int(random(0, cols));
+      y = int(random(0, rows));
+      if(map[y][x] != 0)
+      {
+        int[] temp = validSpawn(x, y);
+        x = temp[0];
+        y = temp[1];
+      }
+      new Prey(x, y, age);
+    }
+  }
+}
+
+int[] validSpawn(int x, int y) {
+  int k = 1;
+  while (true)
+  {
+    try{
+       if(map[y + k][x] == 0)
+          {return new int[]{x, y + k + 3};}
+          
+        else if(map[y - k][x] == 0)
+           {return new int[]{x, y - k - 3};}
+           
+         else if(map[y][x + k] == 0)
+           {return new int[]{x + k + 3, y};}
+           
+         else if(map[y][x - k] == 0)
+           {return new int[]{x - k - 3, y};}
+    }catch (ArrayIndexOutOfBoundsException e){};
+   k++;
+  }
+}
+
 void draw() {
+  for(Prey p : prey)
+  {p.display(preyImg, p.getX() * width/cols , p.getY() * height/rows);}
 }
