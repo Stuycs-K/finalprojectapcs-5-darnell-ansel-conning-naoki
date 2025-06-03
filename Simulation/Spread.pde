@@ -1,5 +1,4 @@
-/*
-class Spread {
+/*class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
 
@@ -42,19 +41,17 @@ class Spread {
       x.addAge();
       //death
       if (x.getAge() > oldage) {
-        pred.remove(n);
+        prey.remove(n);
       }
       //growth
       int baby = pred.size() * growthC;
       for (int a=0; a<baby; a++) {
-        new Prey(i, x, 0);
+        new Prey(prey.get(int(random(0, prey.size()))).getX(), prey.get(int(random(0, prey.size()))).getY(), 0);
       }
     }
-
     //run diffuse
     diffuse();
-
-
+    
     //setup for encounters
     predmap = new ArrayList<Predator>[x][y];
     preymap = new ArrayList<Prey>[x][y];
@@ -83,7 +80,6 @@ class Spread {
     }
     public void diffuse(int[][] Matrix, int[][]map ) {
     }
-
     public ArrayList<Predator> getPred() {
       return pred;
     }
@@ -97,9 +93,7 @@ class Spread {
     public ArrayList<Pre>[][] getPreymap() {
       return preymap;
     }
-  }
-
+}
     class Growth {
     }
-    
     */

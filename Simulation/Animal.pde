@@ -22,7 +22,7 @@ class Animal{
     age ++;
   }
   public void display(PImage img, int x, int y){
-    image(img, x, y, 10, 10);
+    image(img, x, y, 13, 13);
   }
 }  
 
