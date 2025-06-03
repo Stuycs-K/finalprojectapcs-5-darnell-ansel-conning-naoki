@@ -125,6 +125,22 @@ void generateAnimals(int num){
       new Prey(x, y, age);
     }
   }
+  for(int i = 0; i < predCount; i += k)
+  {
+    for(k = 0; k < int(random(1,11)); k ++)
+    {
+      age = int(random(0, 26));
+      x = int(random(0, cols));
+      y = int(random(0, rows));
+      if(map[y][x] != 0)
+      {
+        int[] temp = validSpawn(x, y);
+        x = temp[0];
+        y = temp[1];
+      }
+      new Predator(x, y, age);
+    }
+  }
 }
 
 int[] validSpawn(int x, int y) {
@@ -151,4 +167,6 @@ int[] validSpawn(int x, int y) {
 void draw() {
   for(Prey p : prey)
   {p.display(preyImg, p.getX() * width/cols , p.getY() * height/rows);}
+  for(Predator p : predators)
+  {p.display(predImg, p.getX() * width/cols , p.getY() * height/rows);}
 }
