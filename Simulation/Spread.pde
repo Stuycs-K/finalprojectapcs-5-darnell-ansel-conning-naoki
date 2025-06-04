@@ -75,7 +75,7 @@ class Spread {
      {
        if(!preyMap.get(a).get(b).isEmpty() && !predMap.get(a).get(b).isEmpty())
        {
-         for(int c = 0; c < min(predMap.get(a).get(b).size(), preyMap.get(a).get(b).size()); c++)
+         for(int c = 0; c < min(predMap.get(a).get(b).size(), preyMap.get(a).get(b).size()); c++)//encounter is one to one so we pick smaller arraylist and pair off pred with prey
          {
             Encounter.encounter(predMap.get(a).get(b).get(c), preyMap.get(a).get(b).get(c));
          }
