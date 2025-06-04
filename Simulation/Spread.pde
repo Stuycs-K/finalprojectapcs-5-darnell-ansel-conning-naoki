@@ -1,4 +1,4 @@
-/*class Spread {
+class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
 
@@ -21,7 +21,7 @@
     hunger = hungerthreshold;
     growthC = growthCoeff;
   }
-
+/*
   void tick() {
     for (int m=0; m<pred.size(); m++) {
       //loop through predator list
@@ -50,7 +50,7 @@
       }
     }
     //run diffuse
-    diffuse();
+    //diffuse();
     
     //setup for encounters
     predmap = new ArrayList<Predator>[x][y];
@@ -64,22 +64,40 @@
 
     //run encounter
     encounter();
-  }
+  }*/
+  
+  
+  //Trying agent based tick()
+ void aTick(ArrayList<ArrayList<ArrayList<Predator>>> predMap, ArrayList<ArrayList<ArrayList<Prey>>> preyMap){
+   for(int a = 0; a < rows; a ++)
+   {
+     for(int b = 0; b < cols; b ++)
+     {
+       if(!preyMap.get(a).get(b).isEmpty() && !predMap.get(a).get(b).isEmpty())
+       {
+         for(int c = 0; c < min(predMap.get(a).get(b).size(), preyMap.get(a).get(b).size()); c++)//encounter is one to one so we pick smaller arraylist and pair off pred with prey
+         {
+            Encounter.encounter(predMap.get(a).get(b).get(c), preyMap.get(a).get(b).get(c));
+         }
+       }
+     }
+   }
+ }
+  
 }
-  class Encounter {
-    float chance = 0.70;
-    int hungerChange = 5;
-    boolean encounter(Predator pred, Prey pr) {
-      if (random(0, 1) < chance)
+  static class Encounter {
+    static float chance = 0.70;
+    static int hungerChange = 5;
+    static void encounter(Predator pred, Prey pr) {
+      if (Math.random() < chance)
       {
         pred.addHunger(hungerChange);
         pr.die();
-        return true;
       }
-      return false;
     }
     public void diffuse(int[][] Matrix, int[][]map ) {
     }
+    /*
     public ArrayList<Predator> getPred() {
       return pred;
     }
@@ -93,7 +111,7 @@
     public ArrayList<Pre>[][] getPreymap() {
       return preymap;
     }
+    */
 }
     class Growth {
     }
-    */
