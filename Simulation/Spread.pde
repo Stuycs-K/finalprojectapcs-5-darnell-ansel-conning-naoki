@@ -84,6 +84,15 @@ class Spread {
    }
  }
 
+  void genSF(){
+    for(int i = 0; i < rows; i ++)
+    {
+      for(int k = 0; k < cols; k ++)
+      {
+        for(int j = 1; j < 5; j ++)
+      }
+    }
+  }
   
 }
   static class Encounter {

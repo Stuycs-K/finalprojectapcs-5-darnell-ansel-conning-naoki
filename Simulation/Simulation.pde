@@ -1,6 +1,7 @@
 import java.util.*;
 static int cols, rows;
 int[][] map;
+PVector[][] slopeField;
 int getCols() {
   return cols;
 }
