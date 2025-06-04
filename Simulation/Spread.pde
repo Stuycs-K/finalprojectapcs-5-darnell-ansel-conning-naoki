@@ -84,22 +84,16 @@ class Spread {
    }
  }
   
-  
-  
-  
-  
 }
   static class Encounter {
     static float chance = 0.70;
     static int hungerChange = 5;
-    static boolean encounter(Predator pred, Prey pr) {
+    static void encounter(Predator pred, Prey pr) {
       if (Math.random() < chance)
       {
         pred.addHunger(hungerChange);
         pr.die();
-        return true;
       }
-      return false;
     }
     public void diffuse(int[][] Matrix, int[][]map ) {
     }
