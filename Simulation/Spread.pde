@@ -68,12 +68,18 @@ class Spread {
   
   
   //Trying agent based tick()
- void aTick(ArrayList<ArrayList<ArrayList<Animals>>> AnimalMap){
+ void aTick(ArrayList<ArrayList<ArrayList<Predator>>> predMap, ArrayList<ArrayList<ArrayList<Prey>>> preyMap){
    for(int a = 0; a < rows; a ++)
    {
      for(int b = 0; b < cols; b ++)
      {
-       AnimalMap.get(a).get(b).forEach( (n) if(n.isInstance(Predator)) {encounter(Predator)}) //you get the point finish it....
+       if(!preyMap.get(a).get(b).isEmpty() && !predMap.get(a).get(b).isEmpty())
+       {
+         for(int c = 0; c < min(predMap.get(a).get(b).size(), preyMap.get(a).get(b).size()); c++)
+         {
+            Encounter.encounter(predMap.get(a).get(b).get(c), preyMap.get(a).get(b).get(c));
+         }
+       }
      }
    }
  }
@@ -83,11 +89,11 @@ class Spread {
   
   
 }
-  class Encounter {
-    float chance = 0.70;
-    int hungerChange = 5;
-    boolean encounter(Predator pred, Prey pr) {
-      if (random(0, 1) < chance)
+  static class Encounter {
+    static float chance = 0.70;
+    static int hungerChange = 5;
+    static boolean encounter(Predator pred, Prey pr) {
+      if (Math.random() < chance)
       {
         pred.addHunger(hungerChange);
         pr.die();
@@ -97,6 +103,7 @@ class Spread {
     }
     public void diffuse(int[][] Matrix, int[][]map ) {
     }
+    /*
     public ArrayList<Predator> getPred() {
       return pred;
     }
@@ -110,6 +117,7 @@ class Spread {
     public ArrayList<Pre>[][] getPreymap() {
       return preymap;
     }
+    */
 }
     class Growth {
     }
