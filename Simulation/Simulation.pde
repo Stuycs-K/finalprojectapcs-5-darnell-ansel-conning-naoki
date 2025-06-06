@@ -1,7 +1,7 @@
 import java.util.*;
 static int cols, rows;
 int[][] map;
-ArrayList<int[]> toupledTerrainWaater;
+ArrayList<int[]> toupledTerrainWater;
 ArrayList<int[]> toupledTerrainRock;
 PVector[][] slopeField;
 int getCols() {

@@ -85,6 +85,14 @@ class Spread {
  }
 
   void genSF(){
+    for(int[] toupledTerrainWater)
+    {
+      for(PVector[] row : slopeField)//add to each vector contribution of each water
+      {
+        for(PVector v : row
+      }
+    }
+    //repeat again for rock
   }
   
 }
