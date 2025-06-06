@@ -2,7 +2,7 @@ import java.util.*;
 static int cols, rows;
 int[][] map;
 ArrayList<int[]> toupledTerrainWater;
-ArrayList<int[]> toupledTerrainRock;
+ArrayList<int[]> toupledTerrainRock; ////////////may not need////////////
 PVector[][] slopeField;
 int getCols() {
   return cols;
@@ -31,7 +31,10 @@ void setup(){
   int rectH = height / rows;
   cols = width / rectW;
   rows = height / rectH;
+  println(cols);
+  print(rows);
   map = new int[rows][cols];
+  toupledTerrainWater = new ArrayList<int[]>();
   createMap(15, 10);
   generateTerrain(rectW, rectH);
   generateAnimals(200);
@@ -63,7 +66,7 @@ void dropRock(int size, int x, int y){
     for(int k = 0; k < rockHeight; k ++)
     {
       map[constrain(y + k, 0, rows - 1)][constrain(x - i, 0, cols - 1)] = 1;
-      toupledTerrainRock.add(new int[] {constrain(y + k, 0, rows - 1), constrain(x - i, 0, cols - 1)});
+      //toupledTerrainRock.add(new int[] {constrain(y + k, 0, rows - 1), constrain(x - i, 0, cols - 1)});
     }
   }
 }

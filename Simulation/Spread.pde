@@ -1,3 +1,4 @@
+
 class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
@@ -21,7 +22,7 @@ class Spread {
     hunger = hungerthreshold;
     growthC = growthCoeff;
   }
-/*
+//////////////////
   void tick() {
     for (int m=0; m<pred.size(); m++) {
       //loop through predator list
@@ -64,7 +65,7 @@ class Spread {
 
     //run encounter
     encounter();
-  }*/
+  }
   
   
   //Trying agent based tick()
@@ -85,14 +86,32 @@ class Spread {
  }
 
   void genSF(){
-    for(int[] toupledTerrainWater)
+    float alpha = 0.00000776152278537;
+    //current number is from using denomenator = 800^2 + 500^2 and minimum impact = 0.001
+    //can be generalized like
+    //.00000517434852358 using same denominator but impact = 0.01
+    //gotten using alpha = -(ln(minimum impact) / (cols^2 + rows^2))
+    for (int[] water : toupledTerrainWater)
     {
-      for(PVector[] row : slopeField)//add to each vector contribution of each water
+      int wy = water[0];
+      int wx = water[1];
+  
+      for (int y = 0; y < slopeField.length; y++)
       {
-        for(PVector v : row
+        for (int x = 0; x < slopeField[0].length; x++)
+        {
+          if (x != wx && y != wy)
+          {
+            PVector direction = new PVector(wx - x, wy - y);
+            float distSquared = direction.magSq();
+            float weight = exp(-alpha * distSquared);
+            direction.normalize();
+            direction.mult(weight);
+            slopeField[y][x].add(direction);
+          }
+        }
       }
     }
-    //repeat again for rock
   }
   
 }
@@ -108,7 +127,7 @@ class Spread {
     }
     public void diffuse(int[][] Matrix, int[][]map ) {
     }
-    /*
+    
     public ArrayList<Predator> getPred() {
       return pred;
     }
@@ -122,7 +141,8 @@ class Spread {
     public ArrayList<Pre>[][] getPreymap() {
       return preymap;
     }
-    */
+
 }
-    class Growth {
-    }
+
+class Growth {
+}
