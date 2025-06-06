@@ -1,13 +1,13 @@
 import java.util.*;
 static int cols, rows;
 int[][] map;
-ArrayList<int[]> toupledTerrainWater;
-ArrayList<int[]> toupledTerrainRock; ////////////may not need////////////
-PVector[][] slopeField;
-int getCols() {
+static ArrayList<int[]> toupledTerrainWater;
+public ArrayList<int[]> toupledTerrainRock; ////////////may not need////////////
+static PVector[][] slopeField;
+public int getCols() {
   return cols;
 }
-int getRows() {
+public int getRows() {
   return rows;
 }
 
@@ -21,7 +21,7 @@ ArrayList<Prey> prey = new ArrayList<>();
 ArrayList<Predator> predators= new ArrayList<>();
 
 
-void setup(){
+public void setup(){
   preyImg = loadImage("prey.png");
   predImg = loadImage("pred.png");
   cols = 500;
@@ -34,10 +34,23 @@ void setup(){
   println(cols);
   print(rows);
   map = new int[rows][cols];
+  slopeField = new PVector[rows][cols];
+  for(PVector[] rows : slopeField)
+  {
+    for(int c = 0; c < rows.length; c ++)
+    {
+      rows[c] = new PVector(0, 0);
+    }
+  }
   toupledTerrainWater = new ArrayList<int[]>();
   createMap(15, 10);
-  generateTerrain(rectW, rectH);
-  generateAnimals(200);
+  //generateTerrain(rectW, rectH);
+  //generateAnimals(200);
+  int startTime = millis();
+  Spread.genSF();
+  int elapsedTime = millis() - startTime;
+  print(Arrays.deepToString(slopeField));
+  print(elapsedTime);
 }
 
 void createMap(int rocks, int puddles){

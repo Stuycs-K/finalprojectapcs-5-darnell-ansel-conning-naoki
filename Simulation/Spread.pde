@@ -1,5 +1,5 @@
 
-class Spread {
+static class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
 
@@ -47,13 +47,14 @@ class Spread {
       //growth
       int baby = pred.size() * growthC;
       for (int a=0; a<baby; a++) {
-        new Prey(prey.get(int(random(0, prey.size()))).getX(), prey.get(int(random(0, prey.size()))).getY(), 0);
+        //new Prey(prey.get(int(random(0, prey.size()))).getX(), prey.get(int(random(0, prey.size()))).getY(), 0);
       }
     }
     //run diffuse
     //diffuse();
     
     //setup for encounters
+    /*
     predmap = new ArrayList<Predator>[x][y];
     preymap = new ArrayList<Prey>[x][y];
     for (int i=0; i<pred.size(); i++) {
@@ -65,6 +66,7 @@ class Spread {
 
     //run encounter
     encounter();
+    */
   }
   
   
@@ -85,7 +87,7 @@ class Spread {
    }
  }
 
-  void genSF(){
+   static void genSF(){
     float alpha = 0.00000776152278537;
     //current number is from using denomenator = 800^2 + 500^2 and minimum impact = 0.001
     //can be generalized like
@@ -127,7 +129,7 @@ class Spread {
     }
     public void diffuse(int[][] Matrix, int[][]map ) {
     }
-    
+    /*
     public ArrayList<Predator> getPred() {
       return pred;
     }
@@ -141,6 +143,7 @@ class Spread {
     public ArrayList<Pre>[][] getPreymap() {
       return preymap;
     }
+    */
 
 }
 
