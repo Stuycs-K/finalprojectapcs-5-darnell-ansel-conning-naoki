@@ -1,6 +1,8 @@
 import java.util.*;
 static int cols, rows;
 int[][] map;
+ArrayList<int[]> toupledTerrainWaater;
+ArrayList<int[]> toupledTerrainRock;
 PVector[][] slopeField;
 int getCols() {
   return cols;
@@ -61,6 +63,7 @@ void dropRock(int size, int x, int y){
     for(int k = 0; k < rockHeight; k ++)
     {
       map[constrain(y + k, 0, rows - 1)][constrain(x - i, 0, cols - 1)] = 1;
+      toupledTerrainRock.add(new int[] {constrain(y + k, 0, rows - 1), constrain(x - i, 0, cols - 1)});
     }
   }
 }
@@ -76,6 +79,8 @@ void dropWater(int x, int y, int radius){
       {
         map[y-j][x-k + (radius / 2)] = 2;
         map[y+j][x+k - (radius / 2)] = 2;
+        toupledTerrainWater.add(new int[] {y - j, x-k + (radius / 2)});
+        toupledTerrainWater.add(new int[] {y + j, x+k + (radius / 2)});
       }
       k--;
   }
