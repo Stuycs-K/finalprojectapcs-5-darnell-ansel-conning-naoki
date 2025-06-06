@@ -35,7 +35,12 @@ class Spread {
           //quadratic movement speed based on distance
           int f = -0.04 * ((close[2]-5)^2) + 1;
           
-          
+          //calculates movement amount broken into x and y
+          float xmove = cos(direction) * f;
+          float ymove = sin(direction) * f;
+          //adds to movement matrix (ROUNDING NEEDS TO BE FIXED)
+          Matrix[i][x][0] = (int) xmove;
+          Matrix[i][x][1] = (int) ymove;
         }
       }
     
