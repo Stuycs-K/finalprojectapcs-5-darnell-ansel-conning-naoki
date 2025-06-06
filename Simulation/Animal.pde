@@ -15,6 +15,12 @@ class Animal{
   public int getY(){
     return y;
   }
+  public int setX(int X){
+    x = X;
+  }
+  public int setY(int Y){
+    y = Y;
+  }
   public int getAge(){
     return age;
   }

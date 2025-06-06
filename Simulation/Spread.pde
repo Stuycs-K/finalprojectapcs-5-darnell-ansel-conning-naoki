@@ -10,9 +10,12 @@ class Spread {
   int X;
   int Y;
   int[][]Map;
-  int[][]Matrix;
+  int[][][]Matrix;
+  
 
-  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map, int[][] Matrix) {
+
+
+  Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
     pred = predator;
     prey = pr;
     X = x;
@@ -20,7 +23,46 @@ class Spread {
     oldage = oldAge;
     hunger = hungerthreshold;
     growthC = growthCoeff;
+    Map = map;
   }
+  
+    public void createDiff(){
+      //creates matrix for diffusion
+      Matrix = new int[map.length][map[0].length][2];
+      for(int i=0;i<Matrix.length;i++){
+        for(int x=0;x<Matrix[0].length;x++){
+          int[] close = findWater(x,i);
+          //quadratic movement speed based on distance
+          int f = -0.04 * ((close[2]-5)^2) + 1;
+          
+          
+        }
+      }
+    
+    }
+    public int[] findWater(int x,int y){
+     //finds nearest coords of water (x in 0 index, y in 1, dist in 2, arctan in 3)
+     
+     return new int[][];
+    }
+    
+    public void diffuse() {
+      for(int i =0;i<pred.size();i++){
+         Predator x = pred.get(i);
+         //applies movement to pred
+         x.setX(Matrix[x.getY()][x.getX()][0]);
+         x.setY(Matrix[x.getY()][x.getX()][1]);
+      }
+      for(int i =0;i<prey.size();i++){
+         Prey x = prey.get(i);
+         //applies movement to prey
+         x.setX(Matrix[x.getY()][x.getX()][0]);
+         x.setY(Matrix[x.getY()][x.getX()][1]);
+      }
+      
+      
+  
+    }
 /*
   void tick() {
     for (int m=0; m<pred.size(); m++) {
@@ -84,7 +126,11 @@ class Spread {
    }
  }
   
+  
+  
+  
 }
+
   static class Encounter {
     static float chance = 0.70;
     static int hungerChange = 5;
@@ -95,8 +141,7 @@ class Spread {
         pr.die();
       }
     }
-    public void diffuse(int[][] Matrix, int[][]map ) {
-    }
+
     /*
     public ArrayList<Predator> getPred() {
       return pred;
@@ -115,3 +160,6 @@ class Spread {
 }
     class Growth {
     }
+    
+    
+    
