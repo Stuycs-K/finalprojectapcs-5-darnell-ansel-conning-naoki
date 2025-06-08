@@ -2,7 +2,6 @@ import java.util.*;
 static int cols, rows;
 int[][] map;
 static ArrayList<int[]> toupledTerrainWater;
-public ArrayList<int[]> toupledTerrainRock; ////////////may not need////////////
 static PVector[][] slopeField;
 public int getCols() {
   return cols;
@@ -51,11 +50,11 @@ public void setup(){
   int elapsedTime = millis() - startTime;
   //print(Arrays.deepToString(slopeField));
   print(elapsedTime);
-  
-  for(Prey p : prey)
+  print(Arrays.deepToString(slopeField));
+  /*for(Prey p : prey)
   {p.display(preyImg, p.getX() * width/cols , p.getY() * height/rows);}
   for(Predator p : predators)
-  {p.display(predImg, p.getX() * width/cols , p.getY() * height/rows);}
+  {p.display(predImg, p.getX() * width/cols , p.getY() * height/rows);}*/
 }
 
 void createMap(int rocks, int puddles){
@@ -90,6 +89,8 @@ void dropRock(int size, int x, int y){
 }
 
 void dropWater(int x, int y, int radius){
+  toupledTerrainWater.add(new int[] {y, x+ (radius / 2)});
+  toupledTerrainWater.add(new int[] {y, x+ (radius / 2)});
   float deltaTheta = HALF_PI/(radius-1);
   int k = radius-1;
   fill(0);
@@ -103,8 +104,8 @@ void dropWater(int x, int y, int radius){
         map[y+j][x+k - (radius / 2)] = 2;
         j++;
       }
-      toupledTerrainWater.add(new int[] {y - j, x-k + (radius / 2)});
-      toupledTerrainWater.add(new int[] {y + j, x+k + (radius / 2)});
+      //toupledTerrainWater.add(new int[] {y - j, x-k + (radius / 2)});
+      //toupledTerrainWater.add(new int[] {y + j, x+k + (radius / 2)});
       k--;
   }
 }
@@ -173,6 +174,8 @@ void generateAnimals(int num){
 }
 
 int[] validSpawn(int x, int y) {
+  if(map[y][x] == 0)
+  {return new int[] {x, y};}
   int k = 1;
   while (true)
   {
@@ -196,3 +199,34 @@ int[] validSpawn(int x, int y) {
 void draw() {
   //tick();
 }
+
+
+
+   static void genSF(){
+    float alpha = 0.00000776152278537;
+    //current number is from using denomenator = 800^2 + 500^2 and minimum impact = 0.001
+    //can be generalized like
+    //.00000517434852358 using same denominator but impact = 0.01
+    //gotten using alpha = -(ln(minimum impact) / (cols^2 + rows^2))
+    for (int[] water : toupledTerrainWater)
+    {
+      int wy = water[0];
+      int wx = water[1];
+ 
+      for (int y = 0; y < slopeField.length; y++)
+      {
+        for (int x = 0; x < slopeField[0].length; x++)
+        {
+          if (x != wx && y != wy)
+          {
+            PVector direction = new PVector(wx - x, wy - y);
+            float distSquared = direction.magSq();
+            float weight = exp(-alpha * distSquared);
+            direction.normalize();
+            direction.mult(weight);
+            slopeField[y][x].add(direction);
+          }
+        }
+      }
+    }
+  }
