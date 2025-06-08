@@ -173,7 +173,32 @@ void generateAnimals(int num){
   }
 }
 
-int[] validSpawn(int x, int y) {
+static int[] validSpawn(PVector m) {
+  int x = m.x;
+  int y =m.y;
+  
+  if(map[y][x] == 0)
+  {return new int[] {x, y};}
+  int k = 1;
+  while (true)
+  {
+    try{
+       if(map[y + k][x] == 0)
+          {return new int[]{x, y + k + 3};}
+          
+        else if(map[y - k][x] == 0)
+           {return new int[]{x, y - k - 3};}
+           
+         else if(map[y][x + k] == 0)
+           {return new int[]{x + k + 3, y};}
+           
+         else if(map[y][x - k] == 0)
+           {return new int[]{x - k - 3, y};}
+    }catch (ArrayIndexOutOfBoundsException e){};
+   k++;
+  }
+}
+static int[] validSpawn(int x, int y) {
   if(map[y][x] == 0)
   {return new int[] {x, y};}
   int k = 1;

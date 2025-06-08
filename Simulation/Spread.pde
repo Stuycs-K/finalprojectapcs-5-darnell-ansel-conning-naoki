@@ -21,6 +21,8 @@ static class Spread {
   public void tickA(){
   for(int a=0;a<predmap.length;a++){
     for(int b=0;b<predmap[0].length;b++){
+      
+      //predator
        for(int c=0;c<predmap[a][b].size();c++){
            Predator x = predmap[a][b].get(c);
            //increment age
@@ -31,41 +33,66 @@ static class Spread {
            }
            //Growth
            int baby = predmap[a][b].size() * growthC;
-           for(int a=0; a<baby; a++) {
+           for(int m=0; m<baby; m++) {
               new Prey(a, b, 0);
            }
            //Diffuse
-           Diffuse(x);
+           diffusePred(x);
            //Encounter
            groupEncounter();
        }
+       
+       //prey
+       for(int c=0;c<preymap[a][b].size();c++){
+           Prey x = preymap[a][b].get(c);
+           //increment age
+           x.addAge();
+           //Death
+           if (x.getAge() > oldage || x.getHunger() > hunger) {
+             x.die();
+           }
+           //Growth
+           int baby = preymap[a][b].size() * growthC;
+           for(int m=0; m<baby; m++) {
+              new Prey(a, b, 0);
+           }
+           //Diffuse
+           diffuse(x);
+           //Encounter
+           groupEncounter();
+       }
+       
+       
     }
   }
   
 }
+
+
 
 public void diffuse(Animal x){
   //50% chance of movement
   int chance = (int) (Math.random() * 2);
   if(chance == 1){
     //SF move
-    PVector move = SlopeField[x.getY()][x.getX()];
+    PVector move = slopeField[x.getY()][x.getX()];
     //random move
     int ranX = (int) (Math.random() * 7);
     int ranY = (int) (Math.random() * 7);
     PVector random = new PVector(ranX,ranY);
     //add together
     move.add(random);
-    //current position of animal added to movement
-    int x = move.x + x.getX();
-    int y = move.y + x.getY();
-    //check valid
-    int[][] cord = validSpawn();
-    //change position of animal
-    animal.setX(cord[0]);
-    animal.setY(cord[1]);
+    //current position of prey added to movement
+    PVector current = new PVector(x.getX(),x.getY());
+    move.add(current);
+    int rate = calcMR(x);
+    move.mult(rate);
+    //check if valid
+    x.setXY(validSpawn(move));
+    //change position of prey
   }
 }
+
 
 
 

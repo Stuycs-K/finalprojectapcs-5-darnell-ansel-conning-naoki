@@ -15,6 +15,10 @@ class Animal{
   public int getY(){
     return y;
   }
+  public void setXY(int[] move){
+    x = move[0];
+    y = move[1];
+  }
   public void setX(int X){
     x = X;
   }
