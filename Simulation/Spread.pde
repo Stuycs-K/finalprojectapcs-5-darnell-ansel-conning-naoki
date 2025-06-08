@@ -39,7 +39,6 @@ static class Spread {
            Diffuse(x);
            //Encounter
            groupEncounter();
- 
        }
     }
   }
