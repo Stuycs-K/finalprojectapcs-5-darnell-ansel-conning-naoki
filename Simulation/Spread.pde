@@ -26,7 +26,7 @@ static class Spread {
     growthC = growthCoeff;
     Map = map;
   }
- 
+ /*
     public void createDiff(){
       //creates matrix for diffusion
       Matrix = new int[map.length][map[0].length][2];
@@ -46,11 +46,6 @@ static class Spread {
       }
     
     }
-    public int[] findWater(int x,int y){
-     //finds nearest coords of water (x in 0 index, y in 1, dist in 2, arctan in 3)
-     
-     return new int[][];
-    }
     
     public void diffuse() {
       for(int i =0;i<pred.size();i++){
@@ -65,8 +60,6 @@ static class Spread {
          x.setX(Matrix[x.getY()][x.getX()][0]);
          x.setY(Matrix[x.getY()][x.getX()][1]);
       }
-      
-      
   
     }
 /*
@@ -191,7 +184,7 @@ public void Diffuse(Animal x){
     {
       int wy = water[0];
       int wx = water[1];
-  
+ 
       for (int y = 0; y < slopeField.length; y++)
       {
         for (int x = 0; x < slopeField[0].length; x++)
@@ -209,11 +202,37 @@ public void Diffuse(Animal x){
       }
     }
   }
+  /*
+   static void genSF2(){
+    float alpha = 0.00511685576221;
+    //current number is from using denomenator = 2*(15^2) and minimum impact = 0.1
+    //can be generalized from gaussian falloff of e^-(alpha*x^2)
+    //gotten using alpha = -(ln(minimum impact) / (cols^2 + rows^2))
+    for (int[] water : toupledTerrainWater)
+    {
+      int wy = water[0];
+      int wx = water[1];
+ 
+      for (int y = 0; y < slopeField.length; y++)
+      {
+        for (int x = 0; x < slopeField[0].length; x++)
+        {
+          if (x != wx && y != wy)
+          {
+            PVector direction = new PVector(wx - x, wy - y);
+            float distSquared = direction.magSq();
+            float weight = exp(-alpha * distSquared);
+            direction.normalize();
+            direction.mult(weight);
+            slopeField[y][x].add(direction);
+          }
+        }
+      }
+    }
+  }
+  */
   
-  
-  
-  
-}
+ 
 
   static class Encounter {
     static float chance = 0.70;
