@@ -13,9 +13,6 @@ static class Spread {
   int[][]Map;
   int[][][]Matrix;
   
-
-
-
   Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
     pred = predator;
     prey = pr;
@@ -76,11 +73,6 @@ public void diffuse(Animal x){
     animal.setY(cord[1]);
   }
 }
-
-
-
-
-
 
 
 
