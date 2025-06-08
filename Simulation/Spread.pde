@@ -1,4 +1,3 @@
-
 static class Spread {
   static ArrayList<Predator>[][] predmap;
   static ArrayList<Prey>[][] preymap;
@@ -31,7 +30,7 @@ static class Spread {
              x.die();
            }
            //Growth
-           int baby = pred.size() * growthC;
+           int baby = predmap[a][b].size() * growthC;
            for(int a=0; a<baby; a++) {
               new Prey(a, b, 0);
            }
