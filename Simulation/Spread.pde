@@ -1,4 +1,3 @@
-
 static class Spread {
   static ArrayList<Predator>[][] predmap;
   static ArrayList<Prey>[][] preymap;
@@ -38,7 +37,7 @@ static class Spread {
               new Prey(a, b, 0);
            }
            //Diffuse
-           Diffuse(x);
+           diffusePred(x);
            //Encounter
            groupEncounter();
        }
@@ -54,11 +53,11 @@ static class Spread {
            }
            //Growth
            int baby = preymap[a][b].size() * growthC;
-           for(int a=0; a<baby; a++) {
+           for(int m=0; m<baby; m++) {
               new Prey(a, b, 0);
            }
            //Diffuse
-           Diffuse(x);
+           diffuse(x);
            //Encounter
            groupEncounter();
        }
@@ -69,30 +68,9 @@ static class Spread {
   
 }
 
-public void diffusePred(Predator x){
-  //50% chance of movement
-  int chance = (int) (Math.random() * 2);
-  if(chance == 1){
-    //SF move
-    PVector move = slopeField[x.getY()][x.getX()];
-    //random move
-    int ranX = (int) (Math.random() * 7);
-    int ranY = (int) (Math.random() * 7);
-    PVector random = new PVector(ranX,ranY);
-    //add together
-    move.add(random);
-    //current position of animal added to movement
-    int xpos = (int) move.x + x.getX();
-    int ypos = (int) move.y + x.getY();
-    //check valid
-    int[] cord = validSpawn(xpos,ypos);
-    //change position of animal
-    x.move(cord);
-  }
-}
 
 
-public void diffusePrey(Prey x){
+public void diffuse(Animal x){
   //50% chance of movement
   int chance = (int) (Math.random() * 2);
   if(chance == 1){
@@ -105,13 +83,13 @@ public void diffusePrey(Prey x){
     //add together
     move.add(random);
     //current position of prey added to movement
-    int xpos = (int) move.x + x.getX();
-    int ypos = (int) move.y + x.getY();
-    //check valid
-    int[] cord = validSpawn(xpos,ypos);
-    
+    PVector current = new PVector(x.getX(),x.getY());
+    move.add(current);
+    int rate = calcMR(x);
+    move.mult(rate);
+    //check if valid
+    x.setXY(validSpawn(move));
     //change position of prey
-    x.move(cord);
   }
 }
 
