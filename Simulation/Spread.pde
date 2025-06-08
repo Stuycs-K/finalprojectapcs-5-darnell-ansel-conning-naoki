@@ -116,9 +116,52 @@ static class Spread {
     */
   }
   
+  public void tickA(){
+  for(int a=0;a<predmap.length;a++){
+    for(int b=0;b<predmap[0].length;b++){
+       for(int c=0;c<predmap[a][b].size();c++){
+           Predator x = pred.get(c);
+           //increment age
+           x.addAge();
+           //Death
+           if (x.getAge() > oldage || x.getHunger() > hunger) {
+              pred.remove(m);
+           }
+           //Growth
+           int baby = pred.size() * growthC;
+            for (int a=0; a<baby; a++) {
+              new Prey(a, b, 0);
+           }
+           //Diffuse
+           Diffuse(x);
+           //Encounter
+           groupEncounter();
+ 
+       }
+    }
+  }
   
+}
+
+public void Diffuse(Predator x){
+  //50% chance of movement
+  
+  //movement for pred is purely random 
+  
+  //movement for prey is random + advection
+  
+  
+  
+  
+}
+
+
+
+
+
+
   //Trying agent based tick()
- void aTick(ArrayList<ArrayList<ArrayList<Predator>>> predMap, ArrayList<ArrayList<ArrayList<Prey>>> preyMap){
+ void groupEncounter(){
    for(int a = 0; a < rows; a ++)
    {
      for(int b = 0; b < cols; b ++)
