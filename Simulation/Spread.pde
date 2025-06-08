@@ -38,8 +38,6 @@ static class Spread {
            }
            //Diffuse
            diffusePred(x);
-           //Encounter
-           groupEncounter();
        }
        
        //prey
@@ -48,7 +46,7 @@ static class Spread {
            //increment age
            x.addAge();
            //Death
-           if (x.getAge() > oldage || x.getHunger() > hunger) {
+           if (x.getAge() > oldage){/// || x.getHunger() > hunger) {
              x.die();
            }
            //Growth
@@ -59,7 +57,14 @@ static class Spread {
            //Diffuse
            diffuse(x);
            //Encounter
-           groupEncounter();
+           if(min(preymap[a][b].size(), predmap[a][b].size()) <= preymap[a][b].size())
+           {
+             if(Math.random() < 0.7)
+             {
+               predmap[a][b].get(c).addHunger(1);/////////////////////////for compilation but needs a hunger constant
+               preymap[a][b].get(c).die();
+             }
+           }
        }
        
        
