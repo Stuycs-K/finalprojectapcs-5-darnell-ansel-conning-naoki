@@ -27,6 +27,10 @@ class Animal{
   public void addAge(){
     age ++;
   }
+  public void move(PVector v, float moveRate){
+    x += v.x * moveRate;
+    y += v.y * moveRate;
+  }
   public void display(PImage img, int x, int y){
     image(img, x, y, 13, 13);
   }

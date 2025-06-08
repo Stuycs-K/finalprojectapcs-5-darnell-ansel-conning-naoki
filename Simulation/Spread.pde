@@ -1,4 +1,5 @@
-class Spread {
+
+static class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
 
@@ -25,7 +26,7 @@ class Spread {
     growthC = growthCoeff;
     Map = map;
   }
-  
+ 
     public void createDiff(){
       //creates matrix for diffusion
       Matrix = new int[map.length][map[0].length][2];
@@ -93,13 +94,14 @@ class Spread {
       //growth
       int baby = pred.size() * growthC;
       for (int a=0; a<baby; a++) {
-        new Prey(prey.get(int(random(0, prey.size()))).getX(), prey.get(int(random(0, prey.size()))).getY(), 0);
+        //new Prey(prey.get(int(random(0, prey.size()))).getX(), prey.get(int(random(0, prey.size()))).getY(), 0);
       }
     }
     //run diffuse
     //diffuse();
     
     //setup for encounters
+    /*
     predmap = new ArrayList<Predator>[x][y];
     preymap = new ArrayList<Prey>[x][y];
     for (int i=0; i<pred.size(); i++) {
@@ -111,7 +113,8 @@ class Spread {
 
     //run encounter
     encounter();
-  }*/
+    */
+  }
   
   
   //Trying agent based tick()
@@ -130,6 +133,35 @@ class Spread {
      }
    }
  }
+
+   static void genSF(){
+    float alpha = 0.00000776152278537;
+    //current number is from using denomenator = 800^2 + 500^2 and minimum impact = 0.001
+    //can be generalized like
+    //.00000517434852358 using same denominator but impact = 0.01
+    //gotten using alpha = -(ln(minimum impact) / (cols^2 + rows^2))
+    for (int[] water : toupledTerrainWater)
+    {
+      int wy = water[0];
+      int wx = water[1];
+  
+      for (int y = 0; y < slopeField.length; y++)
+      {
+        for (int x = 0; x < slopeField[0].length; x++)
+        {
+          if (x != wx && y != wy)
+          {
+            PVector direction = new PVector(wx - x, wy - y);
+            float distSquared = direction.magSq();
+            float weight = exp(-alpha * distSquared);
+            direction.normalize();
+            direction.mult(weight);
+            slopeField[y][x].add(direction);
+          }
+        }
+      }
+    }
+  }
   
   
   
@@ -162,9 +194,8 @@ class Spread {
       return preymap;
     }
     */
+
 }
-    class Growth {
-    }
-    
-    
-    
+
+class Growth {
+}
