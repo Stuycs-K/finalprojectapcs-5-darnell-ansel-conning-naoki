@@ -195,7 +195,6 @@ int[] validSpawn(int x, int y) {
    k++;
   }
 }
-
 void draw() {
   //tick();
 }

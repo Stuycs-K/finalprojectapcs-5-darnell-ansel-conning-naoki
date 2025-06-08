@@ -1,4 +1,4 @@
-/*
+
 static class Spread {
   ArrayList<Predator> pred;
   ArrayList<Prey> prey;
@@ -13,9 +13,6 @@ static class Spread {
   int[][]Map;
   int[][][]Matrix;
   
-
-
-
   Spread(ArrayList<Predator> predator, ArrayList<Prey> pr, int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
     pred = predator;
     prey = pr;
@@ -52,7 +49,7 @@ static class Spread {
          //applies movement to pred
          x.setX(Matrix[x.getY()][x.getX()][0]);
          x.setY(Matrix[x.getY()][x.getX()][1]);
-      }
+       }
       for(int i =0;i<prey.size();i++){
          Prey x = prey.get(i);
          //applies movement to prey
@@ -61,7 +58,7 @@ static class Spread {
       }
   
     }
-  
+
   public void tickA(){
   for(int a=0;a<predmap.length;a++){
     for(int b=0;b<predmap[0].length;b++){
@@ -75,7 +72,7 @@ static class Spread {
            }
            //Growth
            int baby = pred.size() * growthC;
-            for (int a=0; a<baby; a++) {
+           for(int a=0; a<baby; a++) {
               new Prey(a, b, 0);
            }
            //Diffuse
@@ -89,8 +86,26 @@ static class Spread {
   
 }
 
-public void Diffuse(Animal x){
-
+public void diffuse(Animal x){
+  //50% chance of movement
+  int chance = (int) (Math.random() * 2);
+  if(chance == 1){
+    //SF move
+    PVector move = SlopeField[x.getY()][x.getX()];
+    //random move
+    int ranX = (int) (Math.random() * 7);
+    int ranY = (int) (Math.random() * 7);
+    PVector random = new PVector(ranX,ranY);
+    
+    //add together
+    move.add(random);
+    //current position of animal
+    PVector current = new PVector(x.getX(),x.getY());
+    //check valid
+    validSpawn();
+    //change position of animal
+    
+  }
 }
 
   //Trying agent based tick()
@@ -175,4 +190,3 @@ public void Diffuse(Animal x){
       }
     }
 }
-*/
