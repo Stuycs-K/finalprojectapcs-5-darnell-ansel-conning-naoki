@@ -1,7 +1,7 @@
 
 static class Spread {
-  ArrayList<Predator>[][] predmap;
-  ArrayList<Prey>[][] preymap;
+  static ArrayList<Predator>[][] predmap;
+  static ArrayList<Prey>[][] preymap;
   int oldage;
   int hunger;
   int growthC;
@@ -10,6 +10,7 @@ static class Spread {
   int[][]Map;
   int[][][]Matrix;
   
+
   Spread(ArrayList<Predator>[][] Predmap,ArrayList<Prey>[][] Preymap, int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
     predmap = Predmap;
     preymap = Preymap;
@@ -25,7 +26,7 @@ static class Spread {
   for(int a=0;a<predmap.length;a++){
     for(int b=0;b<predmap[0].length;b++){
        for(int c=0;c<predmap[a][b].size();c++){
-           Predator x = pred.get(c);
+           Predator x = predmap[a][b].get(c);
            //increment age
            x.addAge();
            //Death
@@ -41,7 +42,6 @@ static class Spread {
            Diffuse(x);
            //Encounter
            groupEncounter();
- 
        }
     }
   }
