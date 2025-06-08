@@ -12,3 +12,6 @@ brainstormed more efficient methods of simulating spread. Continued to work on g
 
 ### 2025-05-29 - started working on tick process
 Redid structure of spread class. Brought diffuse and encounter into the same spread class. 2d map array is now initialized at every tick, but after death and growth which should be slightly more efficient
+
+### 2025-06-07 - Working on diffuse
+Finished up encounter,death and growth. Diffuse is not finished
