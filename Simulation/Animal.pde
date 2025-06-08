@@ -15,10 +15,10 @@ class Animal{
   public int getY(){
     return y;
   }
-  public int setX(int X){
+  public void setX(int X){
     x = X;
   }
-  public int setY(int Y){
+  public void setY(int Y){
     y = Y;
   }
   public int getAge(){
@@ -27,9 +27,9 @@ class Animal{
   public void addAge(){
     age ++;
   }
-  public void move(PVector v, float moveRate){
-    x += v.x * moveRate;
-    y += v.y * moveRate;
+  public void move(int[] v, float moveRate){
+    x += v[1] * moveRate;
+    y += v[0] * moveRate;
   }
   public void display(PImage img, int x, int y){
     image(img, x, y, 13, 13);

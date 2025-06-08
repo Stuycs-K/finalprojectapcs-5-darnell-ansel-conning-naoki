@@ -13,8 +13,15 @@ I expanded simulation class so for the future terrain is easier to make. I made 
 ### 2025-05-28 - planning map gen
 Spent most of my time at home planning how to get the terrain to generate. I have a roadmap for the building of the terrain. Primarily I thought about how to make the lakes look circular, which are approximated with tan(pi/(2 * radius)) and then incremented. in all I spent around 45 minutes planning and working.
 
-### 2025-06-28 - devlog for prev days + what I did today
+### 2025-06-3 - devlog for prev days + what I did today
 I forgot to update the devlog on the previous days and so to not lie but to still update what I did on those days here is a quick rundown:
 over the weekend I looked through and fixed issues that arose because of a large merge conflicts that arose at the end of Fridays class. I also worked on dropWater() logic.
 Yesterday I got dropWater() and displaying the prey and pred to work such that they aren't overlapping w/ rocks or water. And I tried to debug spread, but since I had no idea what it did I was stuck.
 Today I worked on a new Tick() because Naoki is out sick and I am trying to make progress in his stead, I have encounter working and a proper 3d Arraylist setup that will be used to model the positions of the prey and predators.
+
+### 2025-06-7 - devlog for prev days + what I did today
+Similar to my last devlog, (I swear this is the last time I will forget to update the dev log)
+june 4 fixed merge conflicts and started on generating slope fields but in communication with Naoki
+june 5 finished slope filed and explained alpha.
+june 6 talked in class with Naoki about implementation of slope field and tested the slope field finding it was too slow
+today on call with Naoki we worked on fixing new tick and diffusion. Spent most of the 1:30 hour call discussing future approach to the diffusion and movement. 

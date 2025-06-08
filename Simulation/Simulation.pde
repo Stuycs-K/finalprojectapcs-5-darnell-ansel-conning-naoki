@@ -47,10 +47,15 @@ public void setup(){
   //generateTerrain(rectW, rectH);
   //generateAnimals(200);
   int startTime = millis();
-  Spread.genSF();
+  genSF();
   int elapsedTime = millis() - startTime;
-  print(Arrays.deepToString(slopeField));
+  //print(Arrays.deepToString(slopeField));
   print(elapsedTime);
+  
+  for(Prey p : prey)
+  {p.display(preyImg, p.getX() * width/cols , p.getY() * height/rows);}
+  for(Predator p : predators)
+  {p.display(predImg, p.getX() * width/cols , p.getY() * height/rows);}
 }
 
 void createMap(int rocks, int puddles){
@@ -91,13 +96,15 @@ void dropWater(int x, int y, int radius){
   rect(x,y,100,100);
   for(float theta = deltaTheta; theta < HALF_PI; theta += deltaTheta)
   {
-      for(int j = 0; j < (sin(theta) * k); j ++)
+      int j = 0;
+      while( j < (sin(theta) * k))
       {
         map[y-j][x-k + (radius / 2)] = 2;
         map[y+j][x+k - (radius / 2)] = 2;
-        toupledTerrainWater.add(new int[] {y - j, x-k + (radius / 2)});
-        toupledTerrainWater.add(new int[] {y + j, x+k + (radius / 2)});
+        j++;
       }
+      toupledTerrainWater.add(new int[] {y - j, x-k + (radius / 2)});
+      toupledTerrainWater.add(new int[] {y + j, x+k + (radius / 2)});
       k--;
   }
 }
@@ -187,8 +194,5 @@ int[] validSpawn(int x, int y) {
 }
 
 void draw() {
-  for(Prey p : prey)
-  {p.display(preyImg, p.getX() * width/cols , p.getY() * height/rows);}
-  for(Predator p : predators)
-  {p.display(predImg, p.getX() * width/cols , p.getY() * height/rows);}
+  //tick();
 }
