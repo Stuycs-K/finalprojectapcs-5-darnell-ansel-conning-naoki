@@ -191,4 +191,30 @@ void draw() {
   {p.display(preyImg, p.getX() * width/cols , p.getY() * height/rows);}
   for(Predator p : predators)
   {p.display(predImg, p.getX() * width/cols , p.getY() * height/rows);}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
