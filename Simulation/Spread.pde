@@ -143,12 +143,16 @@ static class Spread {
   
 }
 
-public void Diffuse(Predator x){
+public void Diffuse(Animal x){
   //50% chance of movement
-  
-  //movement for pred is purely random 
+  int chance = (int) (Math.random() * 2);
+  if(chance == 1){
+    //movement for pred is purely random 
+    if(
   
   //movement for prey is random + advection
+  }
+
   
   
   
