@@ -38,8 +38,6 @@ static class Spread {
            }
            //Diffuse
            diffusePred(x);
-           //Encounter
-           groupEncounter();
        }
        
        //prey
@@ -48,7 +46,8 @@ static class Spread {
            //increment age
            x.addAge();
            //Death
-           if (x.getAge() > oldage || x.getHunger() > hunger) {
+           if (x.getAge() > oldage)///////////////|| x.getHunger() > hunger) {
+           {
              x.die();
            }
            //Growth
@@ -59,10 +58,15 @@ static class Spread {
            //Diffuse
            diffuse(x);
            //Encounter
-           groupEncounter();
-       }
-       
-       
+           if(predmap[a][b].size() <= preymap[a][b].size())
+           {
+             if(Math.random() < 0.7)
+             {
+               predmap[a][b].get(c).addHunger(1);/////////////////////)///////////////////// SO IT COMPILES  BUT SHOULD BE A COMMON HUNGER CHANGE
+               preymap[a][b].get(c).die();
+             }
+           }
+         }
     }
   }
   
@@ -85,7 +89,7 @@ public void diffuse(Animal x){
     //current position of prey added to movement
     PVector current = new PVector(x.getX(),x.getY());
     move.add(current);
-    int rate = calcMR(x);
+    float rate = calcMR(x);
     move.mult(rate);
     //check if valid
     x.setXY(validSpawn(move));
