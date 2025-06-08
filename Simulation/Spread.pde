@@ -10,10 +10,7 @@ static class Spread {
   int[][]Map;
   int[][][]Matrix;
   
-
-  Spread(ArrayList<Predator>[][] Predmap,ArrayList<Prey>[][] Preymap, int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
-    predmap = Predmap;
-    preymap = Preymap;
+  Spread(int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
     X = x;
     Y = y;
     oldage = oldAge;
@@ -31,7 +28,7 @@ static class Spread {
            x.addAge();
            //Death
            if (x.getAge() > oldage || x.getHunger() > hunger) {
-              x.die();
+             x.die();
            }
            //Growth
            int baby = pred.size() * growthC;

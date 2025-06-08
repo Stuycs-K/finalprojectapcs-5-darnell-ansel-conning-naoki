@@ -62,7 +62,7 @@ class Predator extends Animal{
   int getHunger(){
     return hunger;
   }
-   void die(){
+  void die(){
     Spread.predmap[getY()][getX()].remove(this);
   }
 }
