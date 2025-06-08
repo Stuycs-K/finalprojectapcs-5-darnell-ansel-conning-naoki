@@ -97,4 +97,38 @@ public void diffuse(Animal x){
       }
     }
   }
+  
+  float calcMR(Animal a){
+    int age = a.getAge();
+    float k = 0;
+    if (age < 50)
+    {
+      k= 1.5;
+    }
+    else if (age < 150)
+    {
+      k= 1.25;
+    }
+    else if (age < 250)
+    {
+       k= 1.15;
+    }
+    else if (age < 350)
+    {
+      k= 1.0;
+    }
+    else if (age < 400)
+    {
+        k= 0.85;
+    }
+    else if (age < 450)
+    {
+        k= 0.65;
+    }
+    else if (age <= 500)
+    {
+        k= 0.5;
+    }
+    return map[a.getY()][a.getX()] == 1 ? k * 0.7 : k; 
+  }
 }

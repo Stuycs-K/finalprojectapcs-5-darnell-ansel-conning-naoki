@@ -1,6 +1,6 @@
 import java.util.*;
 static int cols, rows;
-int[][] map;
+static int[][] map;
 static ArrayList<int[]> toupledTerrainWater;
 static PVector[][] slopeField;
 public int getCols() {
