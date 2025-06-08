@@ -46,12 +46,12 @@ class Predator extends Animal{
   Predator(int x_, int y_, int hunger_){
     super(x_, y_);
     hunger = hunger_;
-    predators.add(this);
+    Spread.predmap[y_][x_].add(this);
   }
   Predator(int x_, int y_, int hunger_, int age_){
     super(x_, y_, age_);
     hunger = hunger_;
-    predators.add(this);
+    Spread.predmap[y_][x_].add(this);
   }
   void setHunger(int change){
     hunger = change;
@@ -75,7 +75,7 @@ class Prey extends Animal{
   }
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
-    prey.add(this);
+    Spread.preymap[y_][x_].add(this);
   }
   void die(){
     Spread.preymap[getY()][getX()].remove(this);
