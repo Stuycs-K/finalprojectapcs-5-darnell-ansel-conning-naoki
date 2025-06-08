@@ -53,61 +53,8 @@ static class Spread {
          //applies movement to pred
          x.setX(Matrix[x.getY()][x.getX()][0]);
          x.setY(Matrix[x.getY()][x.getX()][1]);
-      }
-      for(int i =0;i<prey.size();i++){
-         Prey x = prey.get(i);
-         //applies movement to prey
-         x.setX(Matrix[x.getY()][x.getX()][0]);
-         x.setY(Matrix[x.getY()][x.getX()][1]);
-      }
-  
-    }
-/*
-  void tick() {
-    for (int m=0; m<pred.size(); m++) {
-      //loop through predator list
-      Predator x = pred.get(m);
-      //increment age
-      x.addAge();
-      //death
-      if (x.getAge() > oldage || x.getHunger() > hunger) {
-        pred.remove(m);
-      }
-      //growth
-    }
-    for (int n=0; n<prey.size(); n++) {
-      //loop through prey list
-      Prey x = prey.get(n);
-      //increment age
-      x.addAge();
-      //death
-      if (x.getAge() > oldage) {
-        prey.remove(n);
-      }
-      //growth
-      int baby = pred.size() * growthC;
-      for (int a=0; a<baby; a++) {
-        //new Prey(prey.get(int(random(0, prey.size()))).getX(), prey.get(int(random(0, prey.size()))).getY(), 0);
-      }
-    }
-    //run diffuse
-    //diffuse();
-    
-    //setup for encounters
-    /*
-    predmap = new ArrayList<Predator>[x][y];
-    preymap = new ArrayList<Prey>[x][y];
-    for (int i=0; i<pred.size(); i++) {
-      (predmap[i.getX()][i.getY()]).add(i);
-    }
-    for (int i=0; i<prey.size(); i++) {
-      (preymap[i.getX()][i.getY()]).add(i);
-    }
-
-    //run encounter
-    encounter();
-    */
-  }
+ 
+*/
   
   public void tickA(){
   for(int a=0;a<predmap.length;a++){
@@ -122,7 +69,7 @@ static class Spread {
            }
            //Growth
            int baby = pred.size() * growthC;
-            for (int a=0; a<baby; a++) {
+           for(int a=0; a<baby; a++) {
               new Prey(a, b, 0);
            }
            //Diffuse
@@ -136,19 +83,26 @@ static class Spread {
   
 }
 
-public void Diffuse(Animal x){
+public void diffuse(Animal x){
   //50% chance of movement
   int chance = (int) (Math.random() * 2);
   if(chance == 1){
-    //movement for pred is purely random 
-    if(
-  
-  //movement for prey is random + advection
+    //SF move
+    PVector move = SlopeField[x.getY()][x.getX()];
+    //random move
+    int ranX = (int) (Math.random() * 7);
+    int ranY = (int) (Math.random() * 7);
+    PVector random = new PVector(ranX,ranY);
+    
+    //add together
+    move.add(random);
+    //current position of animal
+    PVector current = new PVector(x.getX(),x.getY());
+    //check valid
+    validSpawn();
+    //change position of animal
+    
   }
-
-  
-  
-  
   
 }
 
@@ -261,7 +215,4 @@ public void Diffuse(Animal x){
     }
     */
 
-}
-
-class Growth {
 }
