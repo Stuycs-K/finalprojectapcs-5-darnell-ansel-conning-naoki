@@ -1,23 +1,27 @@
 import java.util.*;
+
+//setup
 static int cols, rows;
 static int[][] map;
 static ArrayList<int[]> toupledTerrainWater;
 static PVector[][] slopeField;
-public int getCols() {
-  return cols;
-}
-public int getRows() {
-  return rows;
-}
 
+//TERRAIN COLOR
 color GRASS = color(0, 255, 0);
 color ROCK = color(125);
 color WATER = color(0, 0, 255);
+
 //ADD SAND WHERE PREY MOVES SLOWER? ADD WHATEVER YOU WANT;
 color[] terrain = {GRASS, ROCK, WATER};
-PImage preyImg, predImg;
+
+//Animal List
 ArrayList<Prey> prey = new ArrayList<>();
 ArrayList<Predator> predators= new ArrayList<>();
+
+//Animal Images
+PImage preyImg, predImg;
+
+Spread spread;
 
 
 public void setup(){
