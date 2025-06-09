@@ -15,3 +15,7 @@ Redid structure of spread class. Brought diffuse and encounter into the same spr
 
 ### 2025-06-07 - Working on diffuse
 Finished up encounter,death and growth. Diffuse is not finished
+
+
+### 2025-06-08 - Working on group encounter, and tick.
+encountered many bugs along the process, currently debugging tick.
