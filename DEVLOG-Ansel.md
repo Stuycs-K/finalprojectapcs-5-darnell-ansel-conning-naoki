@@ -24,4 +24,9 @@ Similar to my last devlog, (I swear this is the last time I will forget to updat
 june 4 fixed merge conflicts and started on generating slope fields but in communication with Naoki
 june 5 finished slope filed and explained alpha.
 june 6 talked in class with Naoki about implementation of slope field and tested the slope field finding it was too slow
-today on call with Naoki we worked on fixing new tick and diffusion. Spent most of the 1:30 hour call discussing future approach to the diffusion and movement. 
+today on call with Naoki we worked on fixing new tick and diffusion. Spent most of the 1:30 hour call discussing future approach to the diffusion and movement.
+
+### 2025-06-8 - Worked on call with Naoki. WOrked on getting things to compile and made child window class plus graph
+I made a child window which mirrors the processing demo. Uses beginShape() with a bunch of vertexs to draw the graphs.
+I added a part to Spread() so that it would instantiate the animal maps but it didn't really work because there where still null pointer exceptions.
+Made calcMR() so that we don't run move twice when constraining positions in terms of the water.

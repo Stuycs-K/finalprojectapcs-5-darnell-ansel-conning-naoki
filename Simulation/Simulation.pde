@@ -1,6 +1,10 @@
 import java.util.*;
+<<<<<<< HEAD
 
 //setup
+=======
+ChildApplet child;
+>>>>>>> 405e8a65cdda126a41dbe76542817fc8ad2794c7
 static int cols, rows;
 static int[][] map;
 static ArrayList<int[]> toupledTerrainWater;
@@ -25,6 +29,7 @@ Spread spread;
 
 
 public void setup(){
+  new Spread(0,0,0,0,0, map);
   preyImg = loadImage("prey.png");
   predImg = loadImage("pred.png");
   cols = 500;
@@ -49,13 +54,17 @@ public void setup(){
   createMap(15, 10);
   //generateTerrain(rectW, rectH);
   //generateAnimals(200);
-  int startTime = millis();
+  Prey p = new Prey(0,0,0);
+  Predator z = new Predator(0,0,0);
+  child = new ChildApplet(p.preyCount(), z.predCount());
+  p.die();
+  z.die();
+  /*int startTime = millis();
   genSF();
   int elapsedTime = millis() - startTime;
-  //print(Arrays.deepToString(slopeField));
   print(elapsedTime);
   print(Arrays.deepToString(slopeField));
-  /*for(Prey p : prey)
+  for(Prey p : prey)
   {p.display(preyImg, p.getX() * width/cols , p.getY() * height/rows);}
   for(Predator p : predators)
   {p.display(predImg, p.getX() * width/cols , p.getY() * height/rows);}*/
@@ -178,8 +187,8 @@ void generateAnimals(int num){
 }
 
 static int[] validSpawn(PVector m) {
-  int x = m.x;
-  int y =m.y;
+  int x = int(m.x);////SO IT COMPILES
+  int y = int(m.y);//// SO IT COMPILES
   
   if(map[y][x] == 0)
   {return new int[] {x, y};}

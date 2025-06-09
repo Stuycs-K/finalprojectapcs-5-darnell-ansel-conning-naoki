@@ -10,6 +10,17 @@ static class Spread {
   int[][][]Matrix;
   
   Spread(int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
+    predmap = (ArrayList<Predator>[][]) new ArrayList[rows][cols]; //this has to be done because java doesnt 
+    preymap = (ArrayList<Prey>[][]) new ArrayList[rows][cols]; // allow  predmap = new ArrayList<Predator>[rows][cols]
+    for (int i = 0; i < rows; i++)
+    {
+      for (int j = 0; j < cols; j++)
+      {
+        predmap[i][j] = new ArrayList<Predator>(10);
+        preymap[i][j] = new ArrayList<Prey>(10);
+      }
+    }    
+    
     X = x;
     Y = y;
     oldage = oldAge;
@@ -41,12 +52,14 @@ static class Spread {
            //Growth
            int baby = predmap[a][b].size() * growthC;
            for(int m=0; m<baby; m++) {
-              new Prey(a, b, 0);
+              //new Prey(a, b, 0);
            }
            //Diffuse
+
            diffuse(x);
            //Encounter
            groupEncounter();
+
        }
        
        //prey
@@ -55,18 +68,27 @@ static class Spread {
            //increment age
            x.addAge();
            //Death
-           if (x.getAge() > oldage) {
+
+           if (x.getAge() > oldage){/// || x.getHunger() > hunger) {
+
              x.die();
            }
            //Growth
            int baby = preymap[a][b].size() * growthC;
            for(int m=0; m<baby; m++) {
-              new Prey(a, b, 0);
+              //new Prey(a, b, 0);
            }
            //Diffuse
            diffuse(x);
            //Encounter
-           groupEncounter();
+           if(min(preymap[a][b].size(), predmap[a][b].size()) <= preymap[a][b].size())
+           {
+             if(Math.random() < 0.7)
+             {
+               predmap[a][b].get(c).addHunger(1);/////////////////////////for compilation but needs a hunger constant
+               preymap[a][b].get(c).die();
+             }
+           }
        }
        
        
@@ -95,7 +117,6 @@ public void diffuse(Animal x){
     //current position of prey added to movement
     PVector current = new PVector(x.getX(),x.getY());
     move.add(current);
-
     //check if valid
     x.setXY(validSpawn(move));
     //change position of animal in map
