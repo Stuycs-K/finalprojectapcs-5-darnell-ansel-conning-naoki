@@ -17,38 +17,45 @@ static class Spread {
     growthC = growthCoeff;
     Map = map;
   }
+  
+  
+  static void initializeMaps(int cols, int rows){
+   //MUST INITIALIZE PRED MAP AND PREY MAP 
+  }
 
   public void tickA(){
   for(int a=0;a<predmap.length;a++){
     for(int b=0;b<predmap[0].length;b++){
       
       //predator
-       for(int c=0;c<predmap[a][b].size();c++){
+       for(int c=predmap[a][b].size()-1;c>=0;c--){
            Predator x = predmap[a][b].get(c);
-           //increment age
+           //increment age and hunger
+           x.addHunger(1);
            x.addAge();
            //Death
-           if (x.getAge() > oldage || x.getHunger() > hunger) {
+           if (x.getAge() > oldage) {
              x.die();
            }
+           
            //Growth
            int baby = predmap[a][b].size() * growthC;
            for(int m=0; m<baby; m++) {
               new Prey(a, b, 0);
            }
            //Diffuse
-           diffusePred(x);
+           diffuse(x);
            //Encounter
            groupEncounter();
        }
        
        //prey
-       for(int c=0;c<preymap[a][b].size();c++){
+       for(int c=preymap[a][b].size();c>=0;c--){
            Prey x = preymap[a][b].get(c);
            //increment age
            x.addAge();
            //Death
-           if (x.getAge() > oldage || x.getHunger() > hunger) {
+           if (x.getAge() > oldage) {
              x.die();
            }
            //Growth
@@ -75,55 +82,32 @@ public void diffuse(Animal x){
   int chance = (int) (Math.random() * 2);
   if(chance == 1){
     //SF move
-    PVector move = slopeField[x.getY()][x.getX()];
+    PVector move = slopeField[x.getY()][x.getX()].copy();
     //random move
     int ranX = (int) (Math.random() * 7);
     int ranY = (int) (Math.random() * 7);
     PVector random = new PVector(ranX,ranY);
     //add together
     move.add(random);
+    //mult move rate
+    int rate = calcMR(x);
+    move.mult(rate);
     //current position of prey added to movement
     PVector current = new PVector(x.getX(),x.getY());
     move.add(current);
-    int rate = calcMR(x);
-    move.mult(rate);
+
     //check if valid
     x.setXY(validSpawn(move));
-    //change position of prey
+    //change position of animal in map
+    // HAVE TO FINISH THIS
+    
   }
 }
 
+public void groupEncounter(){
+ //MUST FINISH THIS FUNCTION 
+}
 
-
-
-   static void genSF(){
-    float alpha = 0.00000776152278537;
-    //current number is from using denomenator = 800^2 + 500^2 and minimum impact = 0.001
-    //can be generalized like
-    //.00000517434852358 using same denominator but impact = 0.01
-    //gotten using alpha = -(ln(minimum impact) / (cols^2 + rows^2))
-    for (int[] water : toupledTerrainWater)
-    {
-      int wy = water[0];
-      int wx = water[1];
- 
-      for (int y = 0; y < slopeField.length; y++)
-      {
-        for (int x = 0; x < slopeField[0].length; x++)
-        {
-          if (x != wx && y != wy)
-          {
-            PVector direction = new PVector(wx - x, wy - y);
-            float distSquared = direction.magSq();
-            float weight = exp(-alpha * distSquared);
-            direction.normalize();
-            direction.mult(weight);
-            slopeField[y][x].add(direction);
-          }
-        }
-      }
-    }
-  }
   
   float calcMR(Animal a){
     int age = a.getAge();
