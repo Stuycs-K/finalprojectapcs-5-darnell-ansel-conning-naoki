@@ -37,7 +37,7 @@ class Animal{
 }  
 
 class Predator extends Animal{
-  int hunger;
+  int hunger, predCount;
   Predator(){
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
     hunger = int(random(0,0));////////UPDATE THIS WITH PROPER BOUNDS/////////
@@ -47,11 +47,13 @@ class Predator extends Animal{
     super(x_, y_);
     hunger = hunger_;
     Spread.predmap[y_][x_].add(this);
+    predCount ++;
   }
   Predator(int x_, int y_, int hunger_, int age_){
     super(x_, y_, age_);
     hunger = hunger_;
     Spread.predmap[y_][x_].add(this);
+    predCount ++;
   }
   void setHunger(int change){
     hunger = change;
@@ -64,10 +66,15 @@ class Predator extends Animal{
   }
   void die(){
     Spread.predmap[getY()][getX()].remove(this);
+    predCount --;
+  }
+  int predCount(){
+    return predCount;
   }
 }
 
 class Prey extends Animal{
+  int preyCount;
   Prey(){
     //////very basic completely random spawn/////
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
@@ -76,8 +83,13 @@ class Prey extends Animal{
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
     Spread.preymap[y_][x_].add(this);
+    preyCount ++;
   }
   void die(){
     Spread.preymap[getY()][getX()].remove(this);
+    preyCount --;
+  }
+  int preyCount(){
+    return preyCount;
   }
 }

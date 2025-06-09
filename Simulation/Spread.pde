@@ -10,6 +10,17 @@ static class Spread {
   int[][][]Matrix;
   
   Spread(int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
+    predmap = (ArrayList<Predator>[][]) new ArrayList[rows][cols]; //this has to be done because java doesnt 
+    preymap = (ArrayList<Prey>[][]) new ArrayList[rows][cols]; // allow  predmap = new ArrayList<Predator>[rows][cols]
+    for (int i = 0; i < rows; i++)
+    {
+      for (int j = 0; j < cols; j++)
+      {
+        predmap[i][j] = new ArrayList<Predator>(10);
+        preymap[i][j] = new ArrayList<Prey>(10);
+      }
+    }    
+    
     X = x;
     Y = y;
     oldage = oldAge;
@@ -34,10 +45,10 @@ static class Spread {
            //Growth
            int baby = predmap[a][b].size() * growthC;
            for(int m=0; m<baby; m++) {
-              new Prey(a, b, 0);
+              //new Prey(a, b, 0);
            }
            //Diffuse
-           diffusePred(x);
+           //diffusePred(x);
        }
        
        //prey
@@ -52,7 +63,7 @@ static class Spread {
            //Growth
            int baby = preymap[a][b].size() * growthC;
            for(int m=0; m<baby; m++) {
-              new Prey(a, b, 0);
+              //new Prey(a, b, 0);
            }
            //Diffuse
            diffuse(x);
@@ -90,7 +101,7 @@ public void diffuse(Animal x){
     //current position of prey added to movement
     PVector current = new PVector(x.getX(),x.getY());
     move.add(current);
-    int rate = calcMR(x);
+    float rate = calcMR(x);
     move.mult(rate);
     //check if valid
     x.setXY(validSpawn(move));
