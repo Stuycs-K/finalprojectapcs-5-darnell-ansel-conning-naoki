@@ -1,5 +1,5 @@
 import java.util.*;
-//ChildApplet child;
+ChildApplet child;
 
 static int cols, rows;
 static int[][] map;
@@ -72,7 +72,7 @@ public void setup(){
   Prey p = new Prey(0,0,0);
   Predator z = new Predator(0,0,0);
   System.out.println("7");
-  //child = new ChildApplet(p.preyCount(), z.predCount());
+  child = new ChildApplet(p.preyCount(), z.predCount());
   p.die();
   z.die();
   genSF();

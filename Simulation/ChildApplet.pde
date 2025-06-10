@@ -3,6 +3,8 @@ public class ChildApplet extends PApplet {
   ArrayList<Integer> population_history_pred;
   public ChildApplet(int preyH, int predH) {
     super();
+    ArrayList<Integer> population_history_prey = new ArrayList<Integer>();
+    ArrayList<Integer> population_history_pred = new ArrayList<Integer>();
     population_history_prey.add(preyH);
     population_history_pred.add(predH);
     PApplet.runSketch(new String[]{this.getClass().getName()}, this);
