@@ -54,6 +54,7 @@ static class Spread {
 
   static void growth(int x, int y, float GrowthConstant) {
     //growth for predator
+    Simulation sim = new Simulation();
     if (!predmap[y][x].isEmpty())
     {
       for (int a = predmap[y][x].size()-1; a>=0; a--)
@@ -61,19 +62,19 @@ static class Spread {
        int ageOf = predmap[y][x].get(a).getAge();
        if (ageOf < 150 && Math.random() < .005 * GrowthConstant)
        {
-         new Predator(x, y, 0, 0);
+         sim.new Predator(x, y, 0, 0);
        }
        else if (ageOf < 250 && Math.random() < .05 * GrowthConstant)
        {
-         new Predator(x, y, 0, 0);
+         sim.new Predator(x, y, 0, 0);
        }
        else if (ageOf < 400 && Math.random() < .01 * GrowthConstant)
        {
-         new Predator(x, y, 0, 0);
+         sim.new Predator(x, y, 0, 0);
        }
        else if (ageOf <= 500 && Math.random() < .005 * GrowthConstant)
        {
-         new Predator(x, y, 0, 0);
+         sim.new Predator(x, y, 0, 0);
        }
       }
     }
@@ -84,19 +85,19 @@ static class Spread {
        int ageOf = preymap[y][x].get(b).getAge();
        if (ageOf < 150 && Math.random() < .005 * GrowthConstant)
        {
-         new Prey(x, y, 0);
+         sim.new Prey(x, y, 0);
        }
        else if (ageOf < 250 && Math.random() < .05 * GrowthConstant)
        {
-         new Prey(x, y, 0);
+         sim.new Prey(x, y, 0);
        }
        else if (ageOf < 400 && Math.random() < .01 * GrowthConstant)
        {
-         new Prey(x, y, 0);
+         sim.new Prey(x, y, 0);
        }
        else if (ageOf <= 500 && Math.random() < .005 * GrowthConstant)
        {
-         new Prey(x, y, 0);
+         sim.new Prey(x, y, 0);
        }
       }
     }
