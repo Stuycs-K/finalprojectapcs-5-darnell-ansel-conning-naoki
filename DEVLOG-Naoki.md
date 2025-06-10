@@ -19,3 +19,9 @@ Finished up encounter,death and growth. Diffuse is not finished
 
 ### 2025-06-08 - Working on group encounter, and tick.
 encountered many bugs along the process, currently debugging tick.
+
+### 2025-06-09 - Working on group encounter, and tick.
+encountered many bugs along the process, currently debugging tick.
+
+### 2025-06-10 - HUGE DAY FOR DEBUGGING. DONE ON CALL W/ ANSEL
+Debugged the entire simulation. Rewrote setup, generate animals, valid spawn, generate slope field, display, population counter, draw, Tick mechanic, growth, death, movement, diffuse, encounter probability. HAVE NOT ADDED GROWTH YET. ALSO NEED TO GET GRAPH WORKING. FINAL STEPS.
