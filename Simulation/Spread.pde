@@ -1,13 +1,9 @@
 static class Spread {
   static ArrayList<Predator>[][] predmap;
   static ArrayList<Prey>[][] preymap;
-  int oldage;
-  int hunger;
-  int growthC;
-  int X;
-  int Y;
-  int[][]Map;
-  int[][][]Matrix;
+  static int oldage, hunger, growthC, X, Y;
+  static int[][]Map;
+
   
   Spread(int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
     predmap = (ArrayList<Predator>[][]) new ArrayList[rows][cols]; //this has to be done because java doesnt 
@@ -29,16 +25,13 @@ static class Spread {
     Map = map;
   }
   
-  
-  static void initializeMaps(int cols, int rows){
-   //MUST INITIALIZE PRED MAP AND PREY MAP 
-  }
 
-  public void tickA(){
+  static public void tickA(){
   for(int a=0;a<predmap.length;a++){
     for(int b=0;b<predmap[0].length;b++){
-      
+      System.out.println("");
       //predator
+      if(!predmap[a][b].isEmpty()){
        for(int c=predmap[a][b].size()-1;c>=0;c--){
            Predator x = predmap[a][b].get(c);
            //increment age and hunger
@@ -58,12 +51,12 @@ static class Spread {
 
            diffuse(x);
            //Encounter
-           groupEncounter();
-
        }
+      }
        
        //prey
-       for(int c=preymap[a][b].size();c>=0;c--){
+       if(!preymap[a][b].isEmpty()){
+       for(int c=preymap[a][b].size()-1;c>=0;c--){
            Prey x = preymap[a][b].get(c);
            //increment age
            x.addAge();
@@ -81,6 +74,7 @@ static class Spread {
            //Diffuse
            diffuse(x);
            //Encounter
+           /*
            if(min(preymap[a][b].size(), predmap[a][b].size()) <= preymap[a][b].size())
            {
              if(Math.random() < 0.7)
@@ -89,9 +83,10 @@ static class Spread {
                preymap[a][b].get(c).die();
              }
            }
+           */
        }
        
-       
+       }
     }
   }
   
@@ -99,7 +94,7 @@ static class Spread {
 
 
 
-public void diffuse(Animal x){
+static public void diffuse(Animal x){
   //50% chance of movement
   int chance = (int) (Math.random() * 2);
   if(chance == 1){
@@ -112,7 +107,7 @@ public void diffuse(Animal x){
     //add together
     move.add(random);
     //mult move rate
-    int rate = calcMR(x);
+    float rate = calcMR(x);
     move.mult(rate);
     //current position of prey added to movement
     PVector current = new PVector(x.getX(),x.getY());
@@ -125,12 +120,12 @@ public void diffuse(Animal x){
   }
 }
 
-public void groupEncounter(){
+static public void groupEncounter(){
  //MUST FINISH THIS FUNCTION 
 }
 
   
-  float calcMR(Animal a){
+  static float calcMR(Animal a){
     int age = a.getAge();
     float k = 0;
     if (age < 50)

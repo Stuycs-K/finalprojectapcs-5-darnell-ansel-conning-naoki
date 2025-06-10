@@ -18,12 +18,36 @@ class Animal{
   public void setXY(int[] move){
     x = move[0];
     y = move[1];
+
+    if(this instanceof Prey){
+
+    this.display(preyImg, this.x * width/cols , this.y * height/rows);
+    }
+    if(this instanceof Predator){
+    this.display(predImg, this.x * width/cols , this.y * height/rows);
+    }
   }
   public void setX(int X){
     x = X;
+    
+    if(this instanceof Prey){
+ 
+    this.display(preyImg, this.x * width/cols , this.y * height/rows);
+    }
+    if(this instanceof Predator){
+    this.display(predImg, this.x * width/cols , this.y * height/rows);
+    }
   }
   public void setY(int Y){
     y = Y;
+
+        if(this instanceof Prey){
+
+    this.display(preyImg, this.x * width/cols , this.y * height/rows);
+    }
+    if(this instanceof Predator){
+    this.display(predImg, this.x * width/cols , this.y * height/rows);
+    }
   }
   public int getAge(){
     return age;
