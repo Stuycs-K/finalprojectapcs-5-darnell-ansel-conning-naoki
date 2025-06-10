@@ -61,7 +61,7 @@ class Animal{
 }  
 
 class Predator extends Animal{
-  int hunger, predCount;
+  int hunger;
   Predator(){
     super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
     hunger = int(random(0,0));////////UPDATE THIS WITH PROPER BOUNDS/////////
@@ -71,13 +71,13 @@ class Predator extends Animal{
     super(x_, y_);
     hunger = hunger_;
     Spread.predmap[y_][x_].add(this);
-    predCount ++;
+    PREDC ++;
   }
   Predator(int x_, int y_, int hunger_, int age_){
     super(x_, y_, age_);
     hunger = hunger_;
     Spread.predmap[y_][x_].add(this);
-    predCount ++;
+    PREDC ++;
   }
   void setHunger(int change){
     hunger = change;
@@ -90,10 +90,10 @@ class Predator extends Animal{
   }
   void die(){
     Spread.predmap[getY()][getX()].remove(this);
-    predCount --;
+    PREDC --;
   }
   int predCount(){
-    return predCount;
+    return PREDC;
   }
 }
 
@@ -107,13 +107,13 @@ class Prey extends Animal{
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
     Spread.preymap[y_][x_].add(this);
-    preyCount ++;
+    PREYC ++;
   }
   void die(){
     Spread.preymap[getY()][getX()].remove(this);
-    preyCount --;
+    PREYC --;
   }
   int preyCount(){
-    return preyCount;
+    return PREYC;
   }
 }

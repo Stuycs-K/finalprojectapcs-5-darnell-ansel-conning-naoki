@@ -1,10 +1,12 @@
 import java.util.*;
-ChildApplet child;
+//ChildApplet child;
 
 static int cols, rows;
 static int[][] map;
 static ArrayList<int[]> toupledTerrainWater;
 static PVector[][] slopeField;
+static int PREDC;
+static int PREYC;
 
 //TERRAIN COLOR
 color GRASS = color(0, 255, 0);
@@ -42,11 +44,12 @@ public void setup(){
   println(cols);
   print(rows);
   System.out.println("3");
-  new Spread(0,0,0,0,0, map);
+  new Spread(0,0,300,0,0, map);
   
   
   map = new int[rows][cols];
   slopeField = new PVector[rows][cols];
+  /* FOR MULTIPLE WATER SOURCES
   for(PVector[] rows : slopeField)
   {
     for(int c = 0; c < rows.length; c ++)
@@ -54,6 +57,7 @@ public void setup(){
       rows[c] = new PVector(0, 0);
     }
   }
+  */
   System.out.println("4");
   toupledTerrainWater = new ArrayList<int[]>();
   createMap(15, 10);
@@ -75,9 +79,7 @@ public void setup(){
   System.out.println("8");
 
   System.out.println("9");
-  draw();
 }
-
 
 
 
@@ -161,7 +163,7 @@ void generateTerrain(int rectW, int rectH){
 }
 
 void generateAnimals(int num){
-  int preyCount = round(random(round(num * 3/4), num + 1));
+  int preyCount = round(num * 3/4);
   int predCount = num - preyCount;
   int age, x, y, k;
   for(int i = 0; i < preyCount; i += k)
@@ -204,57 +206,40 @@ void generateAnimals(int num){
 }
 
 static int[] validSpawn(PVector m) {
-  int x = int(m.x);////SO IT COMPILES
-  int y = int(m.y);//// SO IT COMPILES
-  
-  if(map[y][x] == 0)
-  {return new int[] {x, y};}
-  int k = 1;
-  while (true)
-  {
-    try{
-       if(map[y + k][x] == 0)
-          {return new int[]{x, y + k + 3};}
-          
-        else if(map[y - k][x] == 0)
-           {return new int[]{x, y - k - 3};}
-           
-         else if(map[y][x + k] == 0)
-           {return new int[]{x + k + 3, y};}
-           
-         else if(map[y][x - k] == 0)
-           {return new int[]{x - k - 3, y};}
-    }catch (ArrayIndexOutOfBoundsException e){};
-   k++;
-  }
+  return validSpawn((int)m.x,(int)m.y);
 }
 static int[] validSpawn(int x, int y) {
+  //bounds
+  x = constrain(x,0,cols-1);
+  y = constrain(y,0,rows-1);
+  //base
   if(map[y][x] == 0)
   {return new int[] {x, y};}
-  int k = 1;
-  while (true)
-  {
-    try{
-       if(map[y + k][x] == 0)
-          {return new int[]{x, y + k + 3};}
-          
-        else if(map[y - k][x] == 0)
-           {return new int[]{x, y - k - 3};}
-           
-         else if(map[y][x + k] == 0)
-           {return new int[]{x + k + 3, y};}
-           
-         else if(map[y][x - k] == 0)
-           {return new int[]{x - k - 3, y};}
-    }catch (ArrayIndexOutOfBoundsException e){};
-   k++;
-  }
+  //CHECKS VALID POINTS
+  for(int k = 1; k < Math.max(cols, rows); k++) {
+        if(x - k >= 0 && map[y][x - k] == 0) {
+            return new int[]{x - k, y};
+        }
+        if(y + k < rows && map[y + k][x] == 0){
+            return new int[]{x, y + k};
+        }
+        if(y - k >= 0 && map[y - k][x] == 0) {
+            return new int[]{x, y - k};
+        }
+        if(x + k < cols && map[y][x + k] == 0) {
+            return new int[]{x + k, y};
+        }
+    }
+    //WILL NOT EVER RUN JUST TO COMPILE
+    return new int[]{0,0};
 }
+  
+ 
 
 
 
-
-   static void genSF(){
+  /*
+   static void genSF2(){
     float alpha = 0.00000776152278537;
     //current number is from using denomenator = 800^2 + 500^2 and minimum impact = 0.001
     //can be generalized like
@@ -282,6 +267,46 @@ static int[] validSpawn(int x, int y) {
       }
     }
   }
+  */
+  static void genSF(){
+    float alpha = 0.00000776152278537;
+        //current number is from using denomenator = 800^2 + 500^2 and minimum impact = 0.001
+    //can be generalized like
+    //.00000517434852358 using same denominator but impact = 0.01
+    //gotten using alpha = -(ln(minimum impact) / (cols^2 + rows^2))
+    for (int y = 0; y < slopeField.length; y++) {
+        for (int x = 0; x < slopeField[0].length; x++) {
+            
+            //Find Water
+            float min = Integer.MAX_VALUE;
+            int nearX = -1;
+            int nearY= -1;
+            
+            for (int[] water : toupledTerrainWater) {
+                int wy = water[0];
+                int wx = water[1];
+                float dist = (wx-x)*(wx-x) + (wy-y)*(wy-y);
+                
+                if (dist < min) {
+                    min = dist;
+                    nearX = wx;
+                    nearY = wy;
+                }
+            }
+            if (x != nearX || y != nearY) {
+                PVector direction = new PVector(nearX - x, nearY - y);
+                float weight = exp(-alpha * min);
+                direction.normalize();
+                direction.mult(weight);
+                slopeField[y][x] = direction;
+            }else{
+              slopeField[y][x] = new PVector(0,0);
+            }
+        }
+    }
+}
+  
+  
   
   void display(){
      for(int i=0;i<rows;i++){
@@ -297,23 +322,43 @@ static int[] validSpawn(int x, int y) {
   }
   }
   
-  
-  
-  void draw(){
 
+
+void Counter() {
+    
+    int boxW = 200;
+    int boxH = 100;
+    int boxX = width - boxW;
+    int boxY = 0;
+
+    fill(255, 255, 255); 
+    rect(boxX, boxY, boxW, boxH);
+    fill(0);
+    text("Population Count", boxX + 10, boxY + 20);
+    fill(0, 200, 0); 
+    textSize(12);
+    text("Prey: " + PREYC, boxX + 10, boxY + 40);
+    fill(200, 0, 0); 
+    text("Predators: " + PREDC, boxX + 10, boxY + 55);
+    fill(0);
+    text("Total: " + (PREYC + PREDC), boxX + 10, boxY + 70);
+}
+
+
+void draw(){
+    background(255);
+    int rectW = width / cols;
+    int rectH = height / rows;
+    generateTerrain(rectW, rectH);
     Spread.tickA();
-       System.out.println("a");
-       
-       
-       
+    
+
+    display();
 
     
-    
-     
-    
-  }
-  
-  
+    Counter();
+}
+
   
   
   
