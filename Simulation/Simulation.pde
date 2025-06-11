@@ -1,7 +1,12 @@
 import java.util.*;
+
 static PApplet sketch;
-ChildApplet child;
+
 static int WIDTH, HEIGHT;
+
+ChildApplet child;
+
+
 static int cols, rows;
 static int[][] map;
 static ArrayList<int[]> toupledTerrainWater;

@@ -24,6 +24,7 @@ public class ChildApplet extends PApplet {
     // Launches a new Processing sketch window using this PApplet instance.
     // runSketch takes a String[] (used to name the sketch, like command-line args)
     // and a PApplet object (this), which contains settings(), setup(), and draw().
+
     PApplet.runSketch(new String[]{this.getClass().getName()}, this);
   }
  
@@ -32,7 +33,7 @@ public class ChildApplet extends PApplet {
   }
 
   public void draw() {
-    if (`isPaused) {
+    if (isPaused) {
     background(255);
     popGraph();
     ratioGraph();

@@ -54,7 +54,8 @@ static class Spread {
     }
   }
 ////////////////////////////////////////////////////////////////////////////////
-public static void growth(int x, int y) {
+
+public static void growth(int x, int y,int L) {
     //growth for predator
 
     if (!predmap[y][x].isEmpty())
@@ -81,8 +82,38 @@ public static void growth(int x, int y) {
        }
       }
     }
+}
+  static void growth(int x, int y) {
+    float GrowthConstant = growthC;
+    //growth for predator
+    Simulation sim = new Simulation();
+    if (!predmap[y][x].isEmpty())
+    {
+      for (int a = predmap[y][x].size()-1; a>=0; a--)
+      {
+       int ageOf = predmap[y][x].get(a).getAge();
+       if (ageOf < 150 && Math.random() < .002 * GrowthConstant)
+       {
+         new Predator(x, y, 0, 0);
+       }
+       else if (ageOf < 250 && Math.random() < .003 * GrowthConstant)
+       {
+         new Predator(x, y, 0, 0);
+       }
+       else if (ageOf < 400 && Math.random() < .005 * GrowthConstant)
+       {
+         new Predator(x, y, 0, 0);
+       }
+       else if (ageOf <= 500 && Math.random() < .002 * GrowthConstant)
+       {
+         new Predator(x, y, 0, 0);
+
+       }
+      }
+    }
     //growth for prey
     if (!preymap[y][x].isEmpty()) {
+
 
       for (int b = preymap[y][x].size()-1; b>=0; b--)
       {
@@ -110,7 +141,6 @@ public static void growth(int x, int y) {
        {
 
          new Prey(x, y, 0);
-
        }
       }
     }
