@@ -7,3 +7,5 @@ An agent-based 2D predator-prey population simulation. The model incorporates dy
 
 The intended usage of this simulation is to better understand the interactions and behaviors of predators and prey, when on a 2d plane. It also doubles as a fun game and a simulation to play around with. It is interesting to note the extreme variance in outcomes and dynamics from changing a single parameter by a small amount. 
   
+# YOUTUBE LINK
+https://www.youtube.com/watch?v=FcUhJnxNiOk
