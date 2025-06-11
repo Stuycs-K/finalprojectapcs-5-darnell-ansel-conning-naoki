@@ -163,40 +163,98 @@ public static void growth(int x, int y) {
 
 
   static public void diffuse(Animal x) {
+  // 50% chance of movement  
+  int chance = (int) (Math.random() * 2);
+  if (chance == 1) {
+    int oldX = x.getX();
+    int oldY = x.getY();
+
+    PVector move = leastConcentration(x, oldX, oldY);
+    //concentration based diffusion mult
+    move.mult(1);
     
-    //50% chance of movement
+    //WATER ATTRACTION 
+    PVector SF = slopeField[oldY][oldX].copy();
+    SF.mult(0.3);
+    move.add(SF);
     
-    int chance = (int) (Math.random() * 5);
-    if (chance == 1) {
-      int oldX = x.getX();
-      int oldY = x.getY();
-      //SF move
-      PVector move = slopeField[x.getY()][x.getX()].copy();
-      //random move
-      int ranX = (int) (Math.random() * 9)-4;
-      int ranY = (int) (Math.random() * 9)-4;
-      PVector random = new PVector(ranX, ranY);
-      //add together
-      move.add(random);
-      //mult move rate
-      float rate = calcMR(x);
-      move.mult(rate);
-      //current position of prey added to movement
-      PVector current = new PVector(x.getX(), x.getY());
-      move.add(current);
-      //check if valid
-      int[] newP = validSpawn(move);
-      //change position of animal in map
-      if (x instanceof Predator) {
-        predmap[oldY][oldX].remove((Predator)x);
-        predmap[newP[1]][newP[0]].add((Predator)x);
-      } else if (x instanceof Prey) {
-        preymap[oldY][oldX].remove((Prey)x);
-        preymap[newP[1]][newP[0]].add((Prey)x);
-      }
-      x.setXY(newP);
+    //Random movement mult
+    float multR = 2.0;
+    float xR = (float)(Math.random() * multR * 2 - multR);
+    float xY = (float)(Math.random() * multR * 2 - multR);
+    PVector randXY = new PVector(xR,xY);
+    move.add(randXY);
+    
+    //movement rate based on variables
+    float rate = calcMR(x);
+    move.mult(rate);
+    
+    move.add(new PVector(oldX, oldY));
+    
+    int[] newP = validSpawn(move);
+    
+    if (x instanceof Predator) {
+      predmap[oldY][oldX].remove((Predator)x);
+      predmap[newP[1]][newP[0]].add((Predator)x);
+    } else if (x instanceof Prey) {
+      preymap[oldY][oldX].remove((Prey)x);
+      preymap[newP[1]][newP[0]].add((Prey)x);
+    }
+    x.setXY(newP);
+  }
+}
+
+//lowest concentration direction
+static PVector leastConcentration(Animal animal, int x, int y) {
+  
+  ArrayList<PVector> best = new ArrayList<PVector>();
+  int lowest = Integer.MAX_VALUE;
+  
+  //all directions madde
+  ArrayList<PVector> directions = new ArrayList<PVector>();
+  for (int dx = -1; dx <= 1; dx++) {
+    for (int dy = -1; dy <= 1; dy++) {
+      if (dx == 0 && dy == 0) continue;
+      directions.add(new PVector(dx, dy));
     }
   }
+  
+  
+  // Check all directions
+  for (PVector dir : directions) {
+    int checkX = x + (int)dir.x;
+    int checkY = y + (int)dir.y;
+    
+    if (checkX >= 0 && checkX < cols && checkY >= 0 && checkY < rows) {
+      int count;
+      
+      if (animal instanceof Predator) {
+        count = predmap[checkY][checkX].size();
+        //Pred wants to move towards prey
+        count -= preymap[checkY][checkX].size() * 3;
+      } else {
+        count = preymap[checkY][checkX].size();
+        //Prey wants to move away from pred
+        count += predmap[checkY][checkX].size() * 2;
+      }
+
+      if (count < lowest) {
+        lowest = count;
+        best = new ArrayList<PVector>();
+        best.add(dir);
+      } else if (count == lowest) {
+        best.add(dir);
+      }
+    }
+  }
+  if (best.isEmpty()) {
+    return new PVector(0, 0);
+  }
+  
+  //random selection from best dir
+  int random = (int)(Math.random() * best.size());
+  return best.get(random);
+}
 
   static public void encounter(int x, int y) {
     ArrayList<Predator> neighborPred = new ArrayList<>();
@@ -233,8 +291,7 @@ public static void growth(int x, int y) {
     
     float base = 0.5;
 
-    //HUnger WILL FINISH LATER
-    //float hungerExtra = pred.getHunger() / (float)hunger * 0.3;
+
     //Age
     float age = 1.0;
     Boolean predOY = (pred.getAge() > 350 || pred.getAge() < 50);
