@@ -26,4 +26,7 @@ encountered many bugs along the process, currently debugging tick.
 ### 2025-06-10 - HUGE DAY FOR DEBUGGING. DONE ON CALL W/ ANSEL
 Debugged the entire simulation. Rewrote setup, generate animals, valid spawn, generate slope field, display, population counter, draw, Tick mechanic, growth, death, movement, diffuse, encounter probability. HAVE NOT ADDED GROWTH YET. ALSO NEED TO GET GRAPH WORKING. FINAL STEPS.
 
+### 2025-06-11 - Finished up the simulation, added 2 extra windows for graph and parameters
+Added a window to display a graph of pred and prey populations over time, and the ratio between the two. Additionally we added a window for real time parameter changing.
+
 "I believe this document accurately reflects the contributions of my teamate." - Ansel Darnell
