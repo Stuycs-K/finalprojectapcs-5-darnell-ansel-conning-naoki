@@ -73,7 +73,6 @@ static class Predator extends Animal{
 
 
 static class Prey extends Animal{
-  int preyCount;
 
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
