@@ -21,6 +21,20 @@ The classes fit together as follows:
 in simulation an instance of Spread is called, and instance of Sliders, and ChildApplet, and finally, and many instances of prey and pred are called. Prey and Pred are both extensions of Animal.
 
 ### Key Algorithms
+# ChildApplet:
+ popGraph() uses the data in an arraylist to construct points in a beginshape() to create points connected by lines which creates the graph.
+
+# Simulation:
+ CreateMap calls dropRock and dropWater to add texture to the map. Places the rocks first then the water at random points, so that the water is unimpeded.
+ GenerateAnimals, litters the map with an initial amount of animals.
+ validSpawn is important because it finds the closest non water(valid) spot for the animal to move to or spawn to. It just checks in the cardinal directions not radially.
+ genSF creates a slope field to water by using toupledTerrainWater, looping through it and finding the closest water. Then  it applys a weight to the vector from x and y to the closest water.
+ Display shows every predator and prey by looping over pred and preymap.
+
+# Spread
+updateSimulation()
+# Sliders
+ 
 
 # Intended pacing:
 
