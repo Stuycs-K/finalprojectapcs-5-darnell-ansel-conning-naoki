@@ -16,7 +16,7 @@ static int PREYC;
 
 import controlP5.*;
 ControlP5 cp5;
-boolean showControls = true;
+
 
 Sliders controls;
 static boolean isPaused = false;
@@ -98,7 +98,7 @@ preyImg = loadImage("prey.png");
   p.die();
   z.die();
   genSF();
-  
+
 }
 
 

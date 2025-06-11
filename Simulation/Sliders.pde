@@ -34,16 +34,16 @@ public class Sliders extends PApplet {
     mins[0] = 0; maxs[0] = 600; values[0] = 250;
     
     labels[1] = "Hunger Threshold";
-    mins[1] = 0; maxs[1] = 200; values[1] = 60;
+    mins[1] = 0; maxs[1] = 200; values[1] = 70;
     
     labels[2] = "Reproduction Hunger";
-    mins[2] = 0; maxs[2] = 150; values[2] = 35;
+    mins[2] = 0; maxs[2] = 150; values[2] = 40;
     
     labels[3] = "Growth Coefficient";
     mins[3] = 0.0; maxs[3] = 3.0; values[3] = 0.50;
     
     labels[4] = "Hunt Success Rate";
-    mins[4] = 0.0; maxs[4] = 1.0; values[4] = 0.6;
+    mins[4] = 0.0; maxs[4] = 1.0; values[4] = 0.65;
     
     labels[5] = "Move Chance";
     mins[5] = 0.0; maxs[5] = 1.0; values[5] = 0.5;

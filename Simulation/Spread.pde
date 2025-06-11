@@ -55,16 +55,15 @@ static class Spread {
   }
 ////////////////////////////////////////////////////////////////////////////////
 
-public static void growth(int x, int y,int L) {
-    //growth for predator
 
+  static void growth(int x, int y) {
+    //growth for predator
     if (!predmap[y][x].isEmpty())
     {
-      
       for (int a = predmap[y][x].size()-1; a>=0; a--)
       {
        int ageOf = predmap[y][x].get(a).getAge();
-       if (ageOf < 150 && Math.random() < .001 * growthC)
+       if (ageOf < 150 && Math.random() < .002 * growthC)
        {
          new Predator(x, y, 0, 0);
        }
@@ -72,39 +71,11 @@ public static void growth(int x, int y,int L) {
        {
          new Predator(x, y, 0, 0);
        }
-       else if (ageOf < 400 && Math.random() < .01 * growthC)
+       else if (ageOf < 400 && Math.random() < .005 * growthC)
        {
          new Predator(x, y, 0, 0);
        }
-       else if (ageOf <= 500 && Math.random() < .001 * growthC)
-       {
-         new Predator(x, y, 0, 0);
-       }
-      }
-    }
-}
-  static void growth(int x, int y) {
-    float GrowthConstant = growthC;
-    //growth for predator
-    Simulation sim = new Simulation();
-    if (!predmap[y][x].isEmpty())
-    {
-      for (int a = predmap[y][x].size()-1; a>=0; a--)
-      {
-       int ageOf = predmap[y][x].get(a).getAge();
-       if (ageOf < 150 && Math.random() < .002 * GrowthConstant)
-       {
-         new Predator(x, y, 0, 0);
-       }
-       else if (ageOf < 250 && Math.random() < .003 * GrowthConstant)
-       {
-         new Predator(x, y, 0, 0);
-       }
-       else if (ageOf < 400 && Math.random() < .005 * GrowthConstant)
-       {
-         new Predator(x, y, 0, 0);
-       }
-       else if (ageOf <= 500 && Math.random() < .002 * GrowthConstant)
+       else if (ageOf <= 500 && Math.random() < .002 * growthC)
        {
          new Predator(x, y, 0, 0);
 
@@ -202,8 +173,7 @@ public static void growth(int x, int y,int L) {
 
     PVector move = leastConcentration(x, oldX, oldY);
     //concentration based diffusion mult
-    move.mult(1);
-    
+    move.mult(1.5);
     //WATER ATTRACTION 
     PVector SF = slopeField[oldY][oldX].copy();
     SF.mult(0.3);
@@ -324,6 +294,7 @@ static PVector leastConcentration(Animal animal, int x, int y) {
       }
     }
   }
+  
   //PROBABIILITY OF PRED EATING PREY BASED ON VARS
   static float probability(Predator pred, Prey prey) {
     
