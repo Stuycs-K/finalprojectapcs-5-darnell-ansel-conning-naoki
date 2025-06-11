@@ -23,6 +23,7 @@ static class Spread {
     hunger = hungerthreshold;
     growthC = growthCoeff;
     Map = map;
+    
   }
   // TICK FUNCTION
   static public void tickA() {
@@ -46,24 +47,73 @@ static class Spread {
     //RUN GROWTH
     for (int a= 0; a < predmap.length; a++) {
       for (int b = 0; b < predmap[0].length; b++) {
-        //growth(b, a);
+        growth(b, a);
       }
     }
   }
 ////////////////////////////////////////////////////////////////////////////////
-
-  static void growth(int x, int y) {
+public static void growth(int x, int y) {
     //growth for predator
-    if (!predmap[y][x].isEmpty()) {
-    for (int a = predmap[y][x].size()-1; a>=0; a--){
+
+    if (!predmap[y][x].isEmpty())
+    {
       
-    }}
+      for (int a = predmap[y][x].size()-1; a>=0; a--)
+      {
+       int ageOf = predmap[y][x].get(a).getAge();
+       if (ageOf < 150 && Math.random() < .005 * growthC)
+       {
+         new Predator(x, y, 0, 0);
+       }
+       else if (ageOf < 250 && Math.random() < .05 * growthC)
+       {
+         new Predator(x, y, 0, 0);
+       }
+       else if (ageOf < 400 && Math.random() < .01 * growthC)
+       {
+         new Predator(x, y, 0, 0);
+       }
+       else if (ageOf <= 500 && Math.random() < .005 * growthC)
+       {
+         new Predator(x, y, 0, 0);
+       }
+      }
+    }
     //growth for prey
     if (!preymap[y][x].isEmpty()) {
-    for (int b = preymap[y][x].size()-1; b>=0; b--){
-      
-    }}
+
+      for (int b = preymap[y][x].size()-1; b>=0; b--)
+      {
+        System.out.println(preymap[y][x].size());
+       int ageOf = preymap[y][x].get(b).getAge();
+       if (ageOf < 150 && Math.random() < .005 * growthC)
+       {
+
+         new Prey(x, y, 0);
+
+       }
+       else if (ageOf < 250 && Math.random() < .05 * growthC)
+       {
+
+         new Prey(x, y, 0);
+
+       }
+       else if (ageOf < 400 && Math.random() < .01 * growthC)
+       {
+
+         new Prey(x, y, 0);
+
+       }
+       else if (ageOf <= 500 && Math.random() < .005 * growthC)
+       {
+
+         new Prey(x, y, 0);
+
+       }
+      }
+    }
   }
+ 
 
 
   static void death(int x, int y){
@@ -105,6 +155,7 @@ static class Spread {
       diffuse(prey);
     }
     }
+    
   }
 
 

@@ -1,6 +1,6 @@
 import java.util.*;
-//ChildApplet child;
-
+ChildApplet child;
+static int WIDTH, HEIGHT;
 static int cols, rows;
 static int[][] map;
 static ArrayList<int[]> toupledTerrainWater;
@@ -21,7 +21,7 @@ ArrayList<Prey> prey = new ArrayList<>();
 ArrayList<Predator> predators= new ArrayList<>();
 
 //Animal Images
-PImage preyImg, predImg;
+static PImage preyImg, predImg;
 
 Spread spread;
 
@@ -30,25 +30,21 @@ public void setup(){
   //instantiation of spread class
   cols = 500;
   rows = 500;
-  
-  System.out.println("1");
-  preyImg = loadImage("prey.png");
-  predImg = loadImage("pred.png");
-  System.out.println("2");
+
+
   //create simulation
   size(1000, 800);
+  WIDTH = width;
+  HEIGHT = height;
   int rectW = width / cols;
   int rectH = height / rows;
   cols = width / rectW;
   rows = height / rectH;
-  println(cols);
-  print(rows);
-  System.out.println("3");
-  new Spread(0,0,300,0,0, map);
-  
-  
+
+
   map = new int[rows][cols];
   slopeField = new PVector[rows][cols];
+  
   /* FOR MULTIPLE WATER SOURCES
   for(PVector[] rows : slopeField)
   {
@@ -58,27 +54,25 @@ public void setup(){
     }
   }
   */
-  System.out.println("4");
+  
+  new Spread(0,0,300,0,1, map);
   toupledTerrainWater = new ArrayList<int[]>();
   createMap(15, 10);
-  System.out.println("5");
+
   generateTerrain(rectW, rectH);
-  
-  generateAnimals(200);
+preyImg = loadImage("prey.png");
+  predImg = loadImage("pred.png");
+  generateAnimals(400);
   display();
   
-  
-  System.out.println("6");
   Prey p = new Prey(0,0,0);
   Predator z = new Predator(0,0,0);
-  System.out.println("7");
-  //child = new ChildApplet(p.preyCount(), z.predCount());
+
+  child = new ChildApplet(p.preyCount(), z.predCount());
   p.die();
   z.die();
   genSF();
-  System.out.println("8");
-
-  System.out.println("9");
+  
 }
 
 
@@ -170,20 +164,17 @@ void generateAnimals(int num){
   {
     for(k = 0; k < int(random(1,11)); k ++)
     {
-      System.out.println(rows + "y");
-      System.out.println(cols + "x");
+
       
       age = int(random(0, 26));
       x = int(random(0, cols));
       y = int(random(0, rows));
-      System.out.println(x + " 1+ " + y);
       if(map[y][x] != 0)
       {
         int[] temp = validSpawn(x, y);
         x = temp[0];
         y = temp[1];
       }
-      System.out.println(x + " 2 + " + y);
       new Prey(x, y, age);
     }
   }
@@ -234,7 +225,6 @@ static int[] validSpawn(int x, int y) {
     return new int[]{0,0};
 }
   
- 
 
 
 
@@ -308,19 +298,24 @@ static int[] validSpawn(int x, int y) {
   
   
   
-  void display(){
-     for(int i=0;i<rows;i++){
-     for(int k=0;k<cols;k++){
-       for(Predator pr : Spread.predmap[i][k]){
-         {pr.display(predImg, pr.getX() * width/cols , pr.getY() * height/rows);}
-       }
-       for(Prey py : Spread.preymap[i][k]){
-         {py.display(preyImg, py.getX() * width/cols , py.getY() * height/rows);}
-         
-       }
-     }
+void display() {
+  for (int i = 0; i < rows; i++) {
+    for (int k = 0; k < cols; k++) {
+      // Display predators
+      for (Predator pr : Spread.predmap[i][k]) {
+        if (pr != null && predImg != null) {
+          pr.display(predImg, pr.getX() * width/cols, pr.getY() * height/rows);
+        }
+      }
+      // Display prey
+      for (Prey py : Spread.preymap[i][k]) {
+        if (py != null && preyImg != null) {
+          py.display(preyImg, py.getX() * width/cols, py.getY() * height/rows);
+        }
+      }
+    }
   }
-  }
+}
   
 
 
