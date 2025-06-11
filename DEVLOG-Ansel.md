@@ -33,3 +33,6 @@ Made calcMR() so that we don't run move twice when constraining positions in ter
 
 ### 2025-06-10 - HUGE DAY FOR DEBUGGING. DONE ON CALL W/ NAOKI
 Debugged the entire simulation. Rewrote setup, generate animals, valid spawn, generate slope field, display, population counter, draw, Tick mechanic, growth, death, movement, diffuse, encounter probability. Also made growth compile by creating simulation instance, was later removed.
+
+### 2025-06-11 - HUGE DAY FOR DEBUGGING PLUS FILMING DONE ON CALL W/ NAOKI
+TWEAKED STARTING PARAMETERS AND REMOVED SOME REDUNDANCIES. PLUS FILMED VIDEO AND MADE UML AND FILLED OUT OTHER MD DOCUMENTS ON GITHUB. 
