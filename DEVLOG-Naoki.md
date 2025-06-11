@@ -25,3 +25,5 @@ encountered many bugs along the process, currently debugging tick.
 
 ### 2025-06-10 - HUGE DAY FOR DEBUGGING. DONE ON CALL W/ ANSEL
 Debugged the entire simulation. Rewrote setup, generate animals, valid spawn, generate slope field, display, population counter, draw, Tick mechanic, growth, death, movement, diffuse, encounter probability. HAVE NOT ADDED GROWTH YET. ALSO NEED TO GET GRAPH WORKING. FINAL STEPS.
+
+"I believe this document accurately reflects the contributions of my teamate." - Ansel Darnell
