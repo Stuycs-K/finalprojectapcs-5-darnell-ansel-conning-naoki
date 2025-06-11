@@ -31,19 +31,10 @@ static class Animal{
   public void addAge(){
     age ++;
   }
-  public void display(PApplet sketch,PImage img, int x, int y){
-    sketch.image(img, x, y, 13, 13);
-  }
 }  
 
-class Predator extends Animal{
+static class Predator extends Animal{
   int hunger;
-  Predator(){
-    
-    super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
-    hunger = int(random(0,0));////////UPDATE THIS WITH PROPER BOUNDS/////////
-    predators.add(this);
-  }
   Predator(int x_, int y_, int hunger_){
     super(x_, y_);
     hunger = hunger_;
@@ -74,21 +65,16 @@ class Predator extends Animal{
   }
   void display(PImage img, int x, int y) {
     if (img != null) {
-      image(img, x, y, 13, 13);
+      sketch.image(img, x, y, 13, 13);
     }
   }
 }
   
 
 
-class Prey extends Animal{
+static class Prey extends Animal{
   int preyCount;
-  Prey(){
-    //////very basic completely random spawn/////
-    super(int(random(0, Simulation.cols + 1)), int(random(0, Simulation.rows + 1)));
 
-    prey.add(this);
-  }
   Prey(int x_, int y_, int age_){
     super(x_,y_,age_);
     Spread.preymap[y_][x_].add(this);
@@ -103,7 +89,7 @@ class Prey extends Animal{
   }
    void display(PImage img, int x, int y) {
     if (img != null) {
-      image(img, x, y, 13, 13);
+      sketch.image(img, x+13/2, y+13/2, 13, 13);
     }
   }
 }

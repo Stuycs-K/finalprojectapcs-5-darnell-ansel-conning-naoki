@@ -1,4 +1,5 @@
 import java.util.*;
+static PApplet sketch;
 ChildApplet child;
 static int WIDTH, HEIGHT;
 static int cols, rows;
@@ -7,6 +8,23 @@ static ArrayList<int[]> toupledTerrainWater;
 static PVector[][] slopeField;
 static int PREDC;
 static int PREYC;
+
+import controlP5.*;
+ControlP5 cp5;
+boolean showControls = true;
+
+Sliders controls;
+static boolean isPaused = false;
+
+
+
+
+
+
+
+
+
+
 
 //TERRAIN COLOR
 color GRASS = color(0, 255, 0);
@@ -27,6 +45,8 @@ Spread spread;
 
 
 public void setup(){
+  
+  sketch = this;
   //instantiation of spread class
   cols = 500;
   rows = 500;
@@ -34,6 +54,7 @@ public void setup(){
 
   //create simulation
   size(1000, 800);
+  controls = new Sliders();
   WIDTH = width;
   HEIGHT = height;
   int rectW = width / cols;
@@ -55,7 +76,7 @@ public void setup(){
   }
   */
   
-  new Spread(0,0,300,0,1, map);
+  new Spread(300,60,40,0.5, map);
   toupledTerrainWater = new ArrayList<int[]>();
   createMap(15, 10);
 
@@ -114,8 +135,7 @@ void dropWater(int x, int y, int radius){
   toupledTerrainWater.add(new int[] {y, x+ (radius / 2)});
   float deltaTheta = HALF_PI/(radius-1);
   int k = radius-1;
-  fill(0);
-  rect(x,y,100,100);
+
   for(float theta = deltaTheta; theta < HALF_PI; theta += deltaTheta)
   {
       int j = 0;
@@ -157,7 +177,7 @@ void generateTerrain(int rectW, int rectH){
 }
 
 void generateAnimals(int num){
-  int preyCount = round(num * 3/4);
+  int preyCount = round(num * 7/10);
   int predCount = num - preyCount;
   int age, x, y, k;
   for(int i = 0; i < preyCount; i += k)
@@ -204,20 +224,20 @@ static int[] validSpawn(int x, int y) {
   x = constrain(x,0,cols-1);
   y = constrain(y,0,rows-1);
   //base
-  if(map[y][x] == 0)
+  if(map[y][x] != 2)
   {return new int[] {x, y};}
   //CHECKS VALID POINTS
   for(int k = 1; k < Math.max(cols, rows); k++) {
-        if(x - k >= 0 && map[y][x - k] == 0) {
+        if(x - k >= 0 && map[y][x - k] != 2) {
             return new int[]{x - k, y};
         }
-        if(y + k < rows && map[y + k][x] == 0){
+        if(y + k < rows && map[y + k][x] != 2){
             return new int[]{x, y + k};
         }
-        if(y - k >= 0 && map[y - k][x] == 0) {
+        if(y - k >= 0 && map[y - k][x] != 2) {
             return new int[]{x, y - k};
         }
-        if(x + k < cols && map[y][x + k] == 0) {
+        if(x + k < cols && map[y][x + k] != 2) {
             return new int[]{x + k, y};
         }
     }
@@ -341,21 +361,27 @@ void Counter() {
 
 
 void draw(){
+  if (isPaused) {
     background(255);
     int rectW = width / cols;
     int rectH = height / rows;
     generateTerrain(rectW, rectH);
+    
+      
     Spread.tickA();
+  
+
     
 
     display();
 
     
     Counter();
+  }
 }
 
   
-  
+
   
   
   

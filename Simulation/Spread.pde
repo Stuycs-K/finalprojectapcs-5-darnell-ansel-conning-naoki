@@ -1,11 +1,13 @@
 static class Spread {
   static ArrayList<Predator>[][] predmap;
   static ArrayList<Prey>[][] preymap;
-  static int oldage, hunger, growthC, X, Y;
+  static int oldage, hunger,repHunger;
+  static float growthC, huntRate;
   static int[][]Map;
+  static float moveChance = 2;
 
 
-  Spread(int x, int y, int oldAge, int hungerthreshold, int growthCoeff, int[][] map) {
+  Spread(int oldAge, int hungerthreshold,int reproductionHunger, float growthCoeff, int[][] map) {
     predmap = (ArrayList<Predator>[][]) new ArrayList[rows][cols]; //this has to be done because java doesnt
     preymap = (ArrayList<Prey>[][]) new ArrayList[rows][cols]; // allow  predmap = new ArrayList<Predator>[rows][cols]
     for (int i = 0; i < rows; i++)
@@ -17,16 +19,16 @@ static class Spread {
       }
     }
 
-    X = x;
-    Y = y;
+
     oldage = oldAge;
     hunger = hungerthreshold;
     growthC = growthCoeff;
     Map = map;
-    
+    repHunger = reproductionHunger;
   }
   // TICK FUNCTION
   static public void tickA() {
+
     //ONE TICK OF TIME
     for (int a = 0; a < predmap.length; a++) {
       for (int b = 0; b < predmap[0].length; b++) {
@@ -61,11 +63,11 @@ public static void growth(int x, int y) {
       for (int a = predmap[y][x].size()-1; a>=0; a--)
       {
        int ageOf = predmap[y][x].get(a).getAge();
-       if (ageOf < 150 && Math.random() < .005 * growthC)
+       if (ageOf < 150 && Math.random() < .001 * growthC)
        {
          new Predator(x, y, 0, 0);
        }
-       else if (ageOf < 250 && Math.random() < .05 * growthC)
+       else if (ageOf < 250 && Math.random() < .003 * growthC)
        {
          new Predator(x, y, 0, 0);
        }
@@ -73,7 +75,7 @@ public static void growth(int x, int y) {
        {
          new Predator(x, y, 0, 0);
        }
-       else if (ageOf <= 500 && Math.random() < .005 * growthC)
+       else if (ageOf <= 500 && Math.random() < .001 * growthC)
        {
          new Predator(x, y, 0, 0);
        }
@@ -84,27 +86,27 @@ public static void growth(int x, int y) {
 
       for (int b = preymap[y][x].size()-1; b>=0; b--)
       {
-        System.out.println(preymap[y][x].size());
+
        int ageOf = preymap[y][x].get(b).getAge();
-       if (ageOf < 150 && Math.random() < .005 * growthC)
+       if (ageOf < 150 && Math.random() < .003 * growthC)
        {
 
          new Prey(x, y, 0);
 
        }
-       else if (ageOf < 250 && Math.random() < .05 * growthC)
+       else if (ageOf < 250 && Math.random() < .008 * growthC)
        {
 
          new Prey(x, y, 0);
 
        }
-       else if (ageOf < 400 && Math.random() < .01 * growthC)
+       else if (ageOf < 400 && Math.random() < .015 * growthC)
        {
 
          new Prey(x, y, 0);
 
        }
-       else if (ageOf <= 500 && Math.random() < .005 * growthC)
+       else if (ageOf <= 500 && Math.random() < .003 * growthC)
        {
 
          new Prey(x, y, 0);
@@ -122,8 +124,9 @@ public static void growth(int x, int y) {
     for (int a = predmap[y][x].size()-1; a>=0; a--){
       Predator pred = predmap[y][x].get(a);
       pred.addAge();
-      if (pred.getAge() > oldage) {
-        System.out.println("kill pred");
+      pred.addHunger(1);
+      if (pred.getAge() > oldage || pred.getHunger() > hunger) {
+
            pred.die();
         }
     }
@@ -163,9 +166,7 @@ public static void growth(int x, int y) {
 
 
   static public void diffuse(Animal x) {
-  // 50% chance of movement  
-  int chance = (int) (Math.random() * 2);
-  if (chance == 1) {
+  if (Math.random() < moveChance) {
     int oldX = x.getX();
     int oldY = x.getY();
 
@@ -179,11 +180,11 @@ public static void growth(int x, int y) {
     move.add(SF);
     
     //Random movement mult
-    float multR = 2.0;
+    float multR = 1.0;
     float xR = (float)(Math.random() * multR * 2 - multR);
     float xY = (float)(Math.random() * multR * 2 - multR);
     PVector randXY = new PVector(xR,xY);
-    move.add(randXY);
+    //move.add(randXY);
     
     //movement rate based on variables
     float rate = calcMR(x);
@@ -212,8 +213,8 @@ static PVector leastConcentration(Animal animal, int x, int y) {
   
   //all directions madde
   ArrayList<PVector> directions = new ArrayList<PVector>();
-  for (int dx = -1; dx <= 1; dx++) {
-    for (int dy = -1; dy <= 1; dy++) {
+  for (int dx = -5; dx <= 5; dx++) {
+    for (int dy = -5; dy <= 5; dy++) {
       if (dx == 0 && dy == 0) continue;
       directions.add(new PVector(dx, dy));
     }
@@ -229,13 +230,14 @@ static PVector leastConcentration(Animal animal, int x, int y) {
       int count;
       
       if (animal instanceof Predator) {
-        count = predmap[checkY][checkX].size();
+        count = predmap[checkY][checkX].size() * 2;
         //Pred wants to move towards prey
         count -= preymap[checkY][checkX].size() * 3;
+        
       } else {
-        count = preymap[checkY][checkX].size();
+        count = preymap[checkY][checkX].size() * 2;
         //Prey wants to move away from pred
-        count += predmap[checkY][checkX].size() * 2;
+        count += predmap[checkY][checkX].size() * 3;
       }
 
       if (count < lowest) {
@@ -270,16 +272,22 @@ static PVector leastConcentration(Animal animal, int x, int y) {
         }
       }
     }
-
     //RUN ENCOUNTERS USING PROBABILITY FUNC
     for (Predator pred : neighborPred) {
       for (Prey prey : neighborPrey) {
         float probability = probability(pred, prey);
         if (Math.random() < probability) {
           pred.setHunger(0);
+
           prey.die();
+          neighborPrey.remove(prey);
+
           //debug
-          System.out.println("encoutner");
+          if(Math.random() > 0.6){
+           new Predator(pred.getX(),pred.getY(),0,0);
+          }
+          
+          
           //so it doesnt eat 2
           break;
         }
@@ -289,7 +297,7 @@ static PVector leastConcentration(Animal animal, int x, int y) {
   //PROBABIILITY OF PRED EATING PREY BASED ON VARS
   static float probability(Predator pred, Prey prey) {
     
-    float base = 0.5;
+    float base = huntRate;
 
 
     //Age
