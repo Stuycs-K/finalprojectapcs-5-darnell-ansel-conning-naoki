@@ -30,3 +30,6 @@ today on call with Naoki we worked on fixing new tick and diffusion. Spent most 
 I made a child window which mirrors the processing demo. Uses beginShape() with a bunch of vertexs to draw the graphs.
 I added a part to Spread() so that it would instantiate the animal maps but it didn't really work because there where still null pointer exceptions.
 Made calcMR() so that we don't run move twice when constraining positions in terms of the water.
+
+### 2025-06-10 - HUGE DAY FOR DEBUGGING. DONE ON CALL W/ NAOKI
+Debugged the entire simulation. Rewrote setup, generate animals, valid spawn, generate slope field, display, population counter, draw, Tick mechanic, growth, death, movement, diffuse, encounter probability. Also made growth compile by creating simulation instance, was later removed.
