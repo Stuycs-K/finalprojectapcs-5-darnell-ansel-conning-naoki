@@ -36,3 +36,5 @@ Debugged the entire simulation. Rewrote setup, generate animals, valid spawn, ge
 
 ### 2025-06-11 - HUGE DAY FOR DEBUGGING PLUS FILMING DONE ON CALL W/ NAOKI
 TWEAKED STARTING PARAMETERS AND REMOVED SOME REDUNDANCIES. PLUS FILMED VIDEO AND MADE UML AND FILLED OUT OTHER MD DOCUMENTS ON GITHUB. 
+
+"I believe this document accurately reflects the contributions of my teamate." - Naoki Conning
